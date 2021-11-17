@@ -1,5 +1,6 @@
 import createDataContext from "./createDataContext";
 import trackerApi from "../api/tracker";
+import { dummyRecipes } from "../utils/DummyData";
 
 const recipeReducer = (state, action) => {
 	switch (action.type) {
@@ -22,5 +23,5 @@ const createRecipe = (dispatch) => async (name, locations) => {
 export const { Provider, Context } = createDataContext(
 	recipeReducer,
 	{ fetchRecipes, createRecipe },
-	[]
+	dummyRecipes
 );
