@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  # Live reload is not working at this time for the Expo service
+  #  expo:
+  #    build: ./app
+  #    ports:
+  #      - "19000:19000"
+  #      - "19001:19001"
+  #      - "19002:19002"
+  #    volumes:
+  #      - ./app:/usr/src/app
+  #      - /usr/src/app/node_modules
+  #    environment:
+  #      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+  #      - REACT_NATIVE_PACKAGER_HOSTNAME=192.168.0.100
+  #      - CHOKIDAR_USEPOLLING=true
+  express:
+    build: ./server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    env_file:
+      - ./server/.env_docker
