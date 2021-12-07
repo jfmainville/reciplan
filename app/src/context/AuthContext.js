@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import createDataContext from "./createDataContext";
-import trackerApi from "../api/tracker";
+import recipeApi from "../api/recipe";
 import { navigate } from "../navigationRef";
 
 const authReducer = (state, action) => {
@@ -23,7 +23,7 @@ const tryLocalSignin = (dispatch) => async () => {
 	if (token) {
 		dispatch({ type: "signin", payload: token });
 
-		navigate("TrackList");
+		navigate("RecipeList");
 	} else {
 		navigate("loginFlow");
 	}
@@ -35,11 +35,11 @@ const clearErrorMessage = (dispatch) => () => {
 
 const signup = (dispatch) => async ({ email, password }) => {
 	try {
-		const response = await trackerApi.post("/signup", { email, password });
+		const response = await recipeApi.post("/signup", { email, password });
 		await AsyncStorage.setItem("token", response.data.token);
 		dispatch({ type: "signin", payload: response.data.token });
 
-		navigate("TrackList");
+		navigate("RecipeList");
 	} catch (err) {
 		console.log(err);
 		dispatch({
@@ -51,11 +51,11 @@ const signup = (dispatch) => async ({ email, password }) => {
 
 const signin = (dispatch) => async ({ email, password }) => {
 	try {
-		const response = await trackerApi.post("/signin", { email, password });
+		const response = await recipeApi.post("/signin", { email, password });
 		await AsyncStorage.setItem("token", response.data.token);
 		dispatch({ type: "signin", payload: response.data.token });
 
-		navigate("TrackList");
+		navigate("RecipeList");
 	} catch (err) {
 		dispatch({
 			type: "add_error",

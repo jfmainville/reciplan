@@ -7,15 +7,20 @@ import RecipeListScreen from "./src/screens/RecipeListScreen";
 import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
 import GroceryScreen from "./src/screens/GroceryScreen";
 import AccountScreen from "./src/screens/AccountScreen";
+import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as RecipeProvider } from "./src/context/RecipeContext";
 import { setNavigator } from "./src/navigationRef";
-// import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import SignupScreen from "./src/screens/SignupScreen";
+import SigninScreen from "./src/screens/SigninScreen";
 
 const recipeListFlow = createStackNavigator({
 	RecipeList: RecipeListScreen,
-	RecipeDetail: RecipeDetailScreen
+	RecipeDetail: RecipeDetailScreen,
+	RecipeCreate: RecipeCreateScreen
 });
 
 recipeListFlow.navigationOptions = {
@@ -24,11 +29,11 @@ recipeListFlow.navigationOptions = {
 };
 
 const switchNavigator = createSwitchNavigator({
-		// ResolveAuth: ResolveAuthScreen,
-		// loginFlow: createStackNavigator({
-		// 	Signup: SignupScreen,
-		// 	Signin: SigninScreen
-		// }),
+		ResolveAuth: ResolveAuthScreen,
+		loginFlow: createStackNavigator({
+			Signup: SignupScreen,
+			Signin: SigninScreen
+		}),
 		mainFlow: createBottomTabNavigator({
 			recipeListFlow,
 			Grocery: GroceryScreen,
@@ -42,9 +47,12 @@ const App = createAppContainer(switchNavigator);
 export default () => {
 	return (
 		<SafeAreaProvider>
-			<RecipeProvider>
-				<App ref={(navigator) => setNavigator(navigator)}/>
-			</RecipeProvider>
+			<AuthProvider>
+				<RecipeProvider>
+					<StatusBar barStyle="light-content" backgroundColor="#4854C7"/>
+					<App ref={(navigator) => setNavigator(navigator)}/>
+				</RecipeProvider>
+			</AuthProvider>
 		</SafeAreaProvider>
 	);
 }
