@@ -16,13 +16,11 @@ const fetchRecipes = (dispatch) => async () => {
 };
 
 const createRecipe = (dispatch) => async (recipeName, recipeStyle, recipePreparationTime, recipeCookTime, callback) => {
-	dispatch({
-		type: "create_recipe", payload: {
-			recipeName,
-			recipeStyle,
-			recipePreparationTime,
-			recipeCookTime
-		}
+	await recipeApi.post("/recipes", {
+		recipeName,
+		recipeStyle,
+		recipePreparationTime,
+		recipeCookTime
 	});
 	if (callback) {
 		callback();
