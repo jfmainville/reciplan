@@ -52,8 +52,8 @@ const RecipeListScreen = ({ navigation }) => {
 								onPress={() => navigation.navigate("RecipeDetail", { id: item._id })}
 							>
 								<Text h4>{item.name}</Text>
-								<Text>{item.cook_time} min.</Text>
-								<Text>{item.preparation_time} min.</Text>
+								<Text>{item.preparationTime} min.</Text>
+								<Text>{item.cookTime} min.</Text>
 							</TouchableOpacity>
 						</ListItem.Swipeable>
 					);
