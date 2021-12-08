@@ -15,11 +15,11 @@ const recipeSchema = new mongoose.Schema({
 		type: "String",
 		default: ""
 	},
-	preparation_time: {
+	preparationTime: {
 		type: "Number",
 		default: ""
 	},
-	cook_time: {
+	cookTime: {
 		type: "Number",
 		default: ""
 	},
