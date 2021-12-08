@@ -5,8 +5,6 @@ const recipeReducer = (state, action) => {
 	switch (action.type) {
 		case "fetch_recipes":
 			return action.payload;
-		case "create_recipe":
-			return { ...state, recipes: [...state.recipes, action.payload] };
 		default:
 			return state;
 	}
