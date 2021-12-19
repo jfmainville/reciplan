@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Input, Button } from "react-native-elements";
+import IngredientCreateForm from "./IngredientCreateForm";
 
 const RecipeCreateForm = ({ onSubmit, initialValues }) => {
 	const [recipeName, setRecipeName] = useState(initialValues.recipeName);
@@ -30,11 +31,6 @@ const RecipeCreateForm = ({ onSubmit, initialValues }) => {
 				value={recipeCookTime}
 				onChangeText={(text) => setRecipeCookTime(text)}
 			/>
-			<Button
-				title="Save Recipe"
-				buttonStyle={styles.button}
-				onPress={() => onSubmit(recipeName, recipeStyle, recipePreparationTime, recipeCookTime)}
-			/>
 		</View>
 	);
 };
@@ -52,9 +48,6 @@ RecipeCreateForm.defaultProps = {
 const styles = StyleSheet.create({
 	container: {
 		marginTop: 10
-	},
-	button: {
-		backgroundColor: "#F49301"
 	}
 });
 
