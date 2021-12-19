@@ -1,19 +1,75 @@
-import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, FlatList, StyleSheet } from "react-native";
 import RecipeCreateForm from "../components/RecipeCreateForm";
 import { Context as RecipeContext } from "../context/RecipeContext";
+import IngredientCreateForm from "../components/IngredientCreateForm";
+import { Text, Button } from "react-native-elements";
+import Spacer from "../components/Spacer";
 
 const RecipeCreateScreen = ({ navigation }) => {
 	const { createRecipe } = useContext(RecipeContext);
+	const [ingredientName, setIngredientName] = useState("");
+	const [ingredientQuantity, setIngredientQuantity] = useState("");
+	const [ingredientUnit, setIngredientUnit] = useState("");
+
+	const [ingredients, setIngredients] = useState([]);
+
+	const onAddIngredient = (ingredientQuantity, ingredientUnit, ingredientName) => {
+		setIngredients(ingredients => [...ingredients, {
+			id: ingredients.length + 1,
+			ingredientQuantity,
+			ingredientUnit,
+			ingredientName
+		}]);
+		setIngredientQuantity("");
+		setIngredientUnit("");
+		setIngredientName("");
+	};
+
+	const onDeleteIngredient = (id) => {
+		setIngredients(ingredients.filter(item => item.id !== id));
+	};
 
 	return (
-		<View>
-			<RecipeCreateForm
-				onSubmit={(recipeName, recipeStyle, recipePreparationTime, recipeCookTime) => {
-					createRecipe(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, () => navigation.navigate("RecipeList"));
-				}}
-			/>
-		</View>
+		<FlatList
+			ListHeaderComponent={
+				<View>
+					<Text h2>Recipe</Text>
+					<Spacer/>
+					<RecipeCreateForm/>
+					<Text h2>Ingredients</Text>
+					<Spacer/>
+					<IngredientCreateForm
+						ingredients={ingredients}
+						ingredientName={ingredientName}
+						ingredientQuantity={ingredientQuantity}
+						ingredientUnit={ingredientUnit}
+						setIngredientQuantity={setIngredientQuantity}
+						setIngredientUnit={setIngredientUnit}
+						setIngredientName={setIngredientName}
+						onAddIngredient={onAddIngredient}
+					/>
+				</View>
+			}
+			ListFooterComponent={
+				<Button
+					title="Save Recipe"
+					buttonStyle={styles.save}
+					onPress={(recipeName, recipeStyle, recipePreparationTime, recipeCookTime) => createRecipe(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, () => navigation.navigate("RecipeList"))}
+				/>
+			}
+			data={ingredients}
+			renderItem={({ item }) => {
+				return (
+					<View style={styles.card}>
+						<Text>{item.ingredientName}</Text>
+						<Button
+							title="X"
+							onPress={() => onDeleteIngredient(item.id)}/>
+					</View>
+				);
+			}}
+		/>
 	);
 };
 
@@ -28,6 +84,16 @@ RecipeCreateScreen.navigationOptions = {
 	}
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	save: {
+		marginTop: 10,
+		backgroundColor: "#F49301",
+	},
+	card: {
+		flexDirection: "row",
+		margin: 5,
+		alignItems: "center"
+	}
+});
 
 export default RecipeCreateScreen;
