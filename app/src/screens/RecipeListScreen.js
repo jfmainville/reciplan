@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, FlatList, StatusBar, ScrollView } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { Button, ListItem, Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { FontAwesome } from "@expo/vector-icons";
