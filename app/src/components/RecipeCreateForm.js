@@ -2,12 +2,16 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Input } from "react-native-elements";
 
-const RecipeCreateForm = ({ onSubmit, initialValues }) => {
-	const [recipeName, setRecipeName] = useState(initialValues.recipeName);
-	const [recipeStyle, setRecipeStyle] = useState(initialValues.recipeStyle);
-	const [recipePreparationTime, setRecipePreparationTime] = useState(initialValues.recipePreparationTime);
-	const [recipeCookTime, setRecipeCookTime] = useState(initialValues.recipeCookTime);
-
+const RecipeCreateForm = ({
+	recipeName,
+	recipeStyle,
+	recipePreparationTime,
+	recipeCookTime,
+	setRecipeName,
+	setRecipeStyle,
+	setRecipePreparationTime,
+	setRecipeCookTime
+}) => {
 	return (
 		<View style={styles.container}>
 			<Input

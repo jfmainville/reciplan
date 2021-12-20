@@ -8,6 +8,10 @@ import Spacer from "../components/Spacer";
 
 const RecipeCreateScreen = ({ navigation }) => {
 	const { createRecipe } = useContext(RecipeContext);
+	const [recipeName, setRecipeName] = useState("");
+	const [recipeStyle, setRecipeStyle] = useState("");
+	const [recipePreparationTime, setRecipePreparationTime] = useState("");
+	const [recipeCookTime, setRecipeCookTime] = useState("");
 	const [ingredientName, setIngredientName] = useState("");
 	const [ingredientQuantity, setIngredientQuantity] = useState("");
 	const [ingredientUnit, setIngredientUnit] = useState("");
@@ -36,7 +40,16 @@ const RecipeCreateScreen = ({ navigation }) => {
 				<View>
 					<Text h2>Recipe</Text>
 					<Spacer/>
-					<RecipeCreateForm/>
+					<RecipeCreateForm
+						recipeName={recipeName}
+						recipeStyle={recipeStyle}
+						recipePreparationTime={recipePreparationTime}
+						recipeCookTime={recipeCookTime}
+						setRecipeName={setRecipeName}
+						setRecipeStyle={setRecipeStyle}
+						setRecipePreparationTime={setRecipePreparationTime}
+						setRecipeCookTime={setRecipeCookTime}
+					/>
 					<Text h2>Ingredients</Text>
 					<Spacer/>
 					<IngredientCreateForm
