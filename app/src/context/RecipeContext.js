@@ -30,5 +30,5 @@ const createRecipe = (dispatch) => async (recipeName, recipeStyle, recipePrepara
 export const { Provider, Context } = createDataContext(
 	recipeReducer,
 	{ fetchRecipes, createRecipe },
-	[]
+	{ recipeName: "", recipeStyle: "", recipePreparationTime: null, recipeCookTime: null, ingredients: [] }
 );
