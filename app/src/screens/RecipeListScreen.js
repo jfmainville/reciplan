@@ -6,7 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaView } from "react-navigation";
 
 const RecipeListScreen = ({ navigation }) => {
-	const { state, fetchRecipes } = useContext(RecipeContext);
+	const { state, fetchRecipes, deleteRecipe } = useContext(RecipeContext);
 
 	useEffect(() => {
 		fetchRecipes();
@@ -44,6 +44,7 @@ const RecipeListScreen = ({ navigation }) => {
 									title="Delete"
 									icon={{ name: "delete", color: "white" }}
 									buttonStyle={{ minHeight: "100%", backgroundColor: "red" }}
+									onPress={() => deleteRecipe(item._id)}
 								/>
 							}
 						>
