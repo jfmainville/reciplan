@@ -15,9 +15,9 @@ router.get("/recipes", async (req, res) => {
 });
 
 router.post("/recipes", async (req, res) => {
-	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime } = req.body;
+	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
 
-	if (!recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime) {
+	if (!recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
 
@@ -27,6 +27,7 @@ router.post("/recipes", async (req, res) => {
 			style: recipeStyle,
 			preparationTime: recipePreparationTime,
 			cookTime: recipeCookTime,
+			ingredients: ingredients,
 			userId: req.user._id
 		});
 		await recipe.save();

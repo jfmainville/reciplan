@@ -68,7 +68,9 @@ const RecipeCreateScreen = ({ navigation }) => {
 				<Button
 					title="Save Recipe"
 					buttonStyle={styles.save}
-					onPress={(recipeName, recipeStyle, recipePreparationTime, recipeCookTime) => createRecipe(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, () => navigation.navigate("RecipeList"))}
+					onPress={() => {
+						createRecipe(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"));
+					}}
 				/>
 			}
 			data={ingredients}
