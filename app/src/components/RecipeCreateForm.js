@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Input, Button } from "react-native-elements";
-import IngredientCreateForm from "./IngredientCreateForm";
+import { Input } from "react-native-elements";
 
 const RecipeCreateForm = ({ onSubmit, initialValues }) => {
 	const [recipeName, setRecipeName] = useState(initialValues.recipeName);
