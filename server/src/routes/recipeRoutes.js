@@ -37,4 +37,20 @@ router.post("/recipes", async (req, res) => {
 	}
 });
 
+router.delete("/recipes/delete/:id", async (req, res) => {
+	console.log("delete", req.params.id);
+	const recipeId = req.params.id;
+
+	if (!recipeId) {
+		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
+	}
+
+	try {
+		await Recipe.deleteOne({ _id: recipeId });
+		res.send();
+	} catch (err) {
+		return res.status(422).send({ error: err.message });
+	}
+});
+
 module.exports = router;
