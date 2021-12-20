@@ -21,9 +21,9 @@ const RecipeCreateScreen = ({ navigation }) => {
 	const onAddIngredient = (ingredientQuantity, ingredientUnit, ingredientName) => {
 		setIngredients(ingredients => [...ingredients, {
 			id: ingredients.length + 1,
-			ingredientQuantity,
-			ingredientUnit,
-			ingredientName
+			name: ingredientName,
+			quantity: parseInt(ingredientQuantity),
+			weightUnit: ingredientUnit,
 		}]);
 		setIngredientQuantity("");
 		setIngredientUnit("");
@@ -77,7 +77,7 @@ const RecipeCreateScreen = ({ navigation }) => {
 			renderItem={({ item }) => {
 				return (
 					<View style={styles.card}>
-						<Text>{item.ingredientName}</Text>
+						<Text>{item.name}</Text>
 						<Button
 							title="X"
 							onPress={() => onDeleteIngredient(item.id)}/>
