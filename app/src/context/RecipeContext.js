@@ -5,6 +5,8 @@ const recipeReducer = (state, action) => {
 	switch (action.type) {
 		case "fetch_recipes":
 			return action.payload;
+		case "delete_recipe":
+			return state.filter((recipe) => recipe._id !== action.payload);
 		default:
 			return state;
 	}
@@ -28,8 +30,13 @@ const createRecipe = (dispatch) => async (recipeName, recipeStyle, recipePrepara
 	}
 };
 
+const deleteRecipe = (dispatch) => async (recipeId) => {
+	await recipeApi.delete(`/recipes/delete/${recipeId}`);
+	dispatch({ type: "delete_recipe", payload: recipeId });
+};
+
 export const { Provider, Context } = createDataContext(
 	recipeReducer,
-	{ fetchRecipes, createRecipe },
+	{ fetchRecipes, createRecipe, deleteRecipe },
 	{ recipeName: "", recipeStyle: "", recipePreparationTime: null, recipeCookTime: null, ingredients: [] }
 );
