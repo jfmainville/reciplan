@@ -35,16 +35,6 @@ const RecipeCreateForm = ({ onSubmit, initialValues }) => {
 	);
 };
 
-RecipeCreateForm.defaultProps = {
-	initialValues: {
-		recipeName: "",
-		recipeStyle: "",
-		recipePreparationTime: null,
-		recipeCookTime: null,
-		ingredients: []
-	}
-};
-
 const styles = StyleSheet.create({
 	container: {
 		marginTop: 10
