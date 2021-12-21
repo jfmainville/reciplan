@@ -5,6 +5,7 @@ import { Context as RecipeContext } from "../context/RecipeContext";
 import IngredientForm from "../components/IngredientForm";
 import { Text, Button } from "react-native-elements";
 import Spacer from "../components/Spacer";
+import ObjectID from "bson-objectid";
 
 const RecipeCreateScreen = ({ navigation }) => {
 	const { createRecipe } = useContext(RecipeContext);
@@ -20,7 +21,7 @@ const RecipeCreateScreen = ({ navigation }) => {
 
 	const onAddIngredient = (ingredientQuantity, ingredientUnit, ingredientName) => {
 		setIngredients(ingredients => [...ingredients, {
-			id: ingredients.length + 1,
+			id: ObjectID(),
 			name: ingredientName,
 			quantity: parseInt(ingredientQuantity),
 			weightUnit: ingredientUnit,
