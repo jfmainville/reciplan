@@ -15,6 +15,10 @@ const recipeSchema = new mongoose.Schema({
 		type: "String",
 		default: ""
 	},
+	style: {
+		type: "String",
+		default: ""
+	},
 	preparationTime: {
 		type: "Number",
 		default: ""
