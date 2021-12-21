@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Input } from "react-native-elements";
 
-const RecipeCreateForm = ({
+const RecipeForm = ({
 	recipeName,
 	recipeStyle,
 	recipePreparationTime,
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default RecipeCreateForm;
+export default RecipeForm;
