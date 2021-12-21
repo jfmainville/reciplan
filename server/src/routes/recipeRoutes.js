@@ -37,6 +37,35 @@ router.post("/recipes", async (req, res) => {
 	}
 });
 
+router.put("/recipes/update/:id", (req, res) => {
+	const recipeId = req.params.id;
+	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
+
+	if (!recipeId || !recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
+		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
+	}
+
+	try {
+		Recipe.findById(recipeId, async (err, recipe) => {
+			if (!recipe)
+				return res.status(422).send({ error: err.message });
+			else {
+				recipe.name = recipeName;
+				recipe.style = recipeStyle;
+				recipe.preparationTime = recipePreparationTime;
+				recipe.cookTime = recipeCookTime;
+				recipe.ingredients = ingredients;
+				recipe.userId = req.user._id;
+
+				await recipe.save();
+			}
+			res.send(recipe);
+		});
+	} catch (err) {
+		return res.status(422).send({ error: err.message });
+	}
+});
+
 router.delete("/recipes/delete/:id", async (req, res) => {
 	console.log("delete", req.params.id);
 	const recipeId = req.params.id;
