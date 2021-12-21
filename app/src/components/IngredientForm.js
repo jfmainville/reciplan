@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Input, Button } from "react-native-elements";
 import Spacer from "./Spacer";
 
-const IngredientCreateForm = ({
+const IngredientForm = ({
 	ingredientName,
 	ingredientQuantity,
 	ingredientUnit,
@@ -40,7 +40,7 @@ const IngredientCreateForm = ({
 		;
 };
 
-IngredientCreateForm.defaultProps = {
+IngredientForm.defaultProps = {
 	initialValues: {
 		ingredientQuantity: "",
 		ingredientUnit: "",
@@ -51,4 +51,4 @@ IngredientCreateForm.defaultProps = {
 
 const styles = StyleSheet.create({});
 
-export default IngredientCreateForm;
+export default IngredientForm;
