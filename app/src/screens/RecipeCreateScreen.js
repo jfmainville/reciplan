@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import RecipeCreateForm from "../components/RecipeCreateForm";
+import RecipeForm from "../components/RecipeForm";
 import { Context as RecipeContext } from "../context/RecipeContext";
-import IngredientCreateForm from "../components/IngredientCreateForm";
+import IngredientForm from "../components/IngredientForm";
 import { Text, Button } from "react-native-elements";
 import Spacer from "../components/Spacer";
 
@@ -40,7 +40,7 @@ const RecipeCreateScreen = ({ navigation }) => {
 				<View>
 					<Text h2>Recipe</Text>
 					<Spacer/>
-					<RecipeCreateForm
+					<RecipeForm
 						recipeName={recipeName}
 						recipeStyle={recipeStyle}
 						recipePreparationTime={recipePreparationTime}
@@ -52,7 +52,7 @@ const RecipeCreateScreen = ({ navigation }) => {
 					/>
 					<Text h2>Ingredients</Text>
 					<Spacer/>
-					<IngredientCreateForm
+					<IngredientForm
 						ingredients={ingredients}
 						ingredientName={ingredientName}
 						ingredientQuantity={ingredientQuantity}
