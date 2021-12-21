@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import RecipeCreateScreen from "./src/screens/RecipeCreateScreen";
+import RecipeUpdateScreen from "./src/screens/RecipeUpdateScreen";
 import RecipeListScreen from "./src/screens/RecipeListScreen";
 import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
 import GroceryScreen from "./src/screens/GroceryScreen";
@@ -20,7 +21,8 @@ import SigninScreen from "./src/screens/SigninScreen";
 const recipeListFlow = createStackNavigator({
 	RecipeList: RecipeListScreen,
 	RecipeDetail: RecipeDetailScreen,
-	RecipeCreate: RecipeCreateScreen
+	RecipeCreate: RecipeCreateScreen,
+	RecipeUpdate: RecipeUpdateScreen
 });
 
 recipeListFlow.navigationOptions = {
