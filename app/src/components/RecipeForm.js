@@ -11,10 +11,11 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 	const [recipeCookTime, setRecipeCookTime] = useState((initialValues.cookTime).toString());
 	const [ingredientName, setIngredientName] = useState("");
 	const [ingredientQuantity, setIngredientQuantity] = useState("");
-	const [ingredientUnit, setIngredientUnit] = useState("");
 	const [ingredients, setIngredients] = useState(initialValues.ingredients);
 
-	const onAddIngredient = (ingredientQuantity, ingredientUnit, ingredientName) => {
+	const onAddIngredient = (ingredientQuantity, ingredientName) => {
+		const ingredientUnit = ingredientQuantity.split(/([0-9]+)/)[2].trim();
+
 		setIngredients(ingredients => [...ingredients, {
 			_id: ObjectID(),
 			name: ingredientName,
@@ -22,7 +23,6 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 			weightUnit: ingredientUnit
 		}]);
 		setIngredientQuantity("");
-		setIngredientUnit("");
 		setIngredientName("");
 	};
 
@@ -66,19 +66,9 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 							value={ingredientName}
 							onChangeText={(text) => setIngredientName(text)}
 						/>
-						<Input
-							label="Qty"
-							value={ingredientQuantity}
-							onChangeText={(text) => setIngredientQuantity(text)}
-						/>
-						<Input
-							label="Unit"
-							value={ingredientUnit}
-							onChangeText={(text) => setIngredientUnit(text)}
-						/>
 						<Button
 							title="Add Ingredient"
-							onPress={() => onAddIngredient(ingredientQuantity, ingredientUnit, ingredientName)}
+							onPress={() => onAddIngredient(ingredientQuantity, ingredientName)}
 						/>
 						<Spacer/>
 					</View>
