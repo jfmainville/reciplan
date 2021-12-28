@@ -62,6 +62,11 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 					<Spacer/>
 					<View>
 						<Input
+							label="Quantity"
+							value={ingredientQuantity}
+							onChangeText={(text) => setIngredientQuantity(text)}
+						/>
+						<Input
 							label="Ingredient Name"
 							value={ingredientName}
 							onChangeText={(text) => setIngredientName(text)}
