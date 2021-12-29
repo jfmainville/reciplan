@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import Spacer from "./Spacer";
 import ObjectID from "bson-objectid";
+import { Context as IngredientContext } from "../context/IngredientContext";
 
 const RecipeForm = ({ initialValues, onSubmit }) => {
+	const { state: { foundIngredient }, searchIngredient, resetIngredient } = useContext(IngredientContext);
 	const [recipeName, setRecipeName] = useState(initialValues.name);
 	const [recipeStyle, setRecipeStyle] = useState(initialValues.style);
 	const [recipePreparationTime, setRecipePreparationTime] = useState((initialValues.preparationTime).toString());
@@ -13,17 +15,26 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 	const [ingredientQuantity, setIngredientQuantity] = useState("");
 	const [ingredients, setIngredients] = useState(initialValues.ingredients);
 
-	const onAddIngredient = (ingredientQuantity, ingredientName) => {
-		const ingredientUnit = ingredientQuantity.split(/([0-9]+)/)[2].trim();
+	useEffect(() => {
+		searchIngredient(ingredientName);
+	}, [ingredientName]);
 
-		setIngredients(ingredients => [...ingredients, {
-			_id: ObjectID(),
-			name: ingredientName,
-			quantity: parseInt(ingredientQuantity),
-			weightUnit: ingredientUnit
-		}]);
-		setIngredientQuantity("");
-		setIngredientName("");
+	const onAddIngredient = (ingredientQuantity, ingredientName) => {
+		if (ingredientQuantity && ingredientName) {
+			const ingredientUnit = ingredientQuantity.split(/([0-9]+)/)[2].trim();
+
+			if (foundIngredient.length > 0) {
+				setIngredients(ingredients => [...ingredients, {
+					_id: ObjectID(),
+					name: foundIngredient[0].name,
+					quantity: parseInt(ingredientQuantity),
+					weightUnit: ingredientUnit
+				}]);
+				setIngredientQuantity("");
+				setIngredientName("");
+				resetIngredient();
+			}
+		}
 	};
 
 	const onDeleteIngredient = (id) => {
