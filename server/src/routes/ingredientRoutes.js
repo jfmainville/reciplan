@@ -11,8 +11,8 @@ router.use(requireAuth);
 
 router.post("/ingredients", async (req, res) => {
 	const { ingredientName } = req.body;
-	
-	const ingredient = await Ingredient.find({ name: { $regex: ".*" + ingredientName + ".*", "$options": "i" } });
+
+	const ingredient = await Ingredient.find({ name: { $regex: ingredientName + ".*", "$options": "i" } });
 	res.send(ingredient);
 });
 
