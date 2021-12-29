@@ -10,6 +10,7 @@ import GroceryScreen from "./src/screens/GroceryScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as RecipeProvider } from "./src/context/RecipeContext";
+import { Provider as IngredientProvider } from "./src/context/IngredientContext";
 import { setNavigator } from "./src/navigationRef";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaProvider } from "react-native-safe-area-context";
