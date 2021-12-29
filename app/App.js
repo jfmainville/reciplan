@@ -52,8 +52,10 @@ export default () => {
 		<SafeAreaProvider>
 			<AuthProvider>
 				<RecipeProvider>
-					<StatusBar barStyle="light-content" backgroundColor="#4854C7"/>
-					<App ref={(navigator) => setNavigator(navigator)}/>
+					<IngredientProvider>
+						<StatusBar barStyle="light-content" backgroundColor="#4854C7"/>
+						<App ref={(navigator) => setNavigator(navigator)}/>
+					</IngredientProvider>
 				</RecipeProvider>
 			</AuthProvider>
 		</SafeAreaProvider>
