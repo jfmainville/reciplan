@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
+import { Button, Input, ListItem, Text } from "react-native-elements";
 import Spacer from "./Spacer";
 import ObjectID from "bson-objectid";
 import { Context as IngredientContext } from "../context/IngredientContext";
@@ -102,10 +102,18 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 			renderItem={({ item }) => {
 				return (
 					<View style={styles.card}>
-						<Text>{item.name}</Text>
-						<Button
-							title="X"
-							onPress={() => onDeleteIngredient(item._id)}/>
+						<ListItem.Swipeable
+							rightContent={
+								<Button
+									title="Delete"
+									icon={{ name: "delete", color: "white" }}
+									buttonStyle={{ minHeight: "100%", backgroundColor: "red" }}
+									onPress={() => onDeleteIngredient(item._id)}
+								/>
+							}
+						>
+							<Text style={{ fontSize: 20 }}>{item.quantity}{item.weightUnit} {item.name}</Text>
+						</ListItem.Swipeable>
 					</View>
 				);
 			}}
@@ -129,9 +137,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#F49301",
 	},
 	card: {
-		flexDirection: "row",
-		margin: 5,
-		alignItems: "center"
+		flex: 1
 	}
 });
 
