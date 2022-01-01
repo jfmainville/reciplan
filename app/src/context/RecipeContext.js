@@ -24,7 +24,7 @@ const fetchRecipes = (dispatch) => async () => {
 };
 
 const createRecipe = () => async (recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
-	await recipeApi.post("/recipes", {
+	await recipeApi.post("/recipes/create", {
 		recipeName,
 		recipeStyle,
 		recipePreparationTime,
