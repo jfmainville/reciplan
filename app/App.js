@@ -6,7 +6,7 @@ import RecipeCreateScreen from "./src/screens/RecipeCreateScreen";
 import RecipeUpdateScreen from "./src/screens/RecipeUpdateScreen";
 import RecipeListScreen from "./src/screens/RecipeListScreen";
 import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
-import GroceryScreen from "./src/screens/GroceryScreen";
+import GroceryListScreen from "./src/screens/GroceryListScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as RecipeProvider } from "./src/context/RecipeContext";
@@ -26,9 +26,18 @@ const recipeListFlow = createStackNavigator({
 	RecipeUpdate: RecipeUpdateScreen
 });
 
+const groceryListFlow = createStackNavigator({
+	GroceryList: GroceryListScreen
+});
+
 recipeListFlow.navigationOptions = {
 	title: "Recipes",
 	tabBarIcon: <FontAwesome5 name="book" size={20}/>
+};
+
+groceryListFlow.navigationOptions = {
+	title: "Grocery List",
+	tabBarIcon: <FontAwesome name="shopping-cart" size={20}/>
 };
 
 const switchNavigator = createSwitchNavigator({
@@ -39,7 +48,7 @@ const switchNavigator = createSwitchNavigator({
 		}),
 		mainFlow: createBottomTabNavigator({
 			recipeListFlow,
-			Grocery: GroceryScreen,
+			groceryListFlow,
 			Account: AccountScreen
 		})
 	})
