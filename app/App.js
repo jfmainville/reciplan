@@ -10,6 +10,7 @@ import GroceryListScreen from "./src/screens/GroceryListScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as RecipeProvider } from "./src/context/RecipeContext";
+import { Provider as GroceryProvider } from "./src/context/GroceryContext";
 import { Provider as IngredientProvider } from "./src/context/IngredientContext";
 import { setNavigator } from "./src/navigationRef";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -61,10 +62,12 @@ export default () => {
 		<SafeAreaProvider>
 			<AuthProvider>
 				<RecipeProvider>
-					<IngredientProvider>
-						<StatusBar barStyle="light-content" backgroundColor="#4854C7"/>
-						<App ref={(navigator) => setNavigator(navigator)}/>
-					</IngredientProvider>
+					<GroceryProvider>
+						<IngredientProvider>
+							<StatusBar barStyle="light-content" backgroundColor="#4854C7"/>
+							<App ref={(navigator) => setNavigator(navigator)}/>
+						</IngredientProvider>
+					</GroceryProvider>
 				</RecipeProvider>
 			</AuthProvider>
 		</SafeAreaProvider>
