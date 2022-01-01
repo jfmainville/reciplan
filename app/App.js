@@ -13,7 +13,7 @@ import { Provider as RecipeProvider } from "./src/context/RecipeContext";
 import { Provider as GroceryProvider } from "./src/context/GroceryContext";
 import { Provider as IngredientProvider } from "./src/context/IngredientContext";
 import { setNavigator } from "./src/navigationRef";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "react-native";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
