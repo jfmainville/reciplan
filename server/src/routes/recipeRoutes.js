@@ -14,7 +14,7 @@ router.get("/recipes", async (req, res) => {
 	res.send(recipes);
 });
 
-router.post("/recipes", async (req, res) => {
+router.post("/recipes/create", async (req, res) => {
 	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
 
 	if (!recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
