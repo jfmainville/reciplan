@@ -2,11 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { Button, ListItem, Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
+import { Context as GroceryContext } from "../context/GroceryContext";
 import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaView } from "react-navigation";
 
 const RecipeListScreen = ({ navigation }) => {
 	const { state, fetchRecipes, deleteRecipe } = useContext(RecipeContext);
+	const { addRecipeIngredients } = useContext(GroceryContext);
 
 	useEffect(() => {
 		fetchRecipes();
@@ -37,6 +39,7 @@ const RecipeListScreen = ({ navigation }) => {
 									title="Add"
 									icon={{ name: "add", color: "white" }}
 									buttonStyle={{ minHeight: "100%" }}
+									onPress={() => addRecipeIngredients(item)}
 								/>
 							}
 							rightContent={
