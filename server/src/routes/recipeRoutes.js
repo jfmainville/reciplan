@@ -67,7 +67,6 @@ router.put("/recipes/update/:id", (req, res) => {
 });
 
 router.delete("/recipes/delete/:id", async (req, res) => {
-	console.log("delete", req.params.id);
 	const recipeId = req.params.id;
 
 	if (!recipeId) {
