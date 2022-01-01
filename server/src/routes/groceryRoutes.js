@@ -19,8 +19,8 @@ router.post("/groceries/ingredients", async (req, res) => {
 
 	const updatedRecipes = recipe.ingredients.map(ingredient => {
 		delete ingredient._id;
-		if (recipe.recipeId) {
-			ingredient.recipeId = recipe.recipeId;
+		if (recipe._id) {
+			ingredient.recipeId = recipe._id;
 		} else {
 			ingredient.recipeId = null;
 		}
