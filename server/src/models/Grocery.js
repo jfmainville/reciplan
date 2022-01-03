@@ -5,6 +5,11 @@ const grocerySchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User"
 		},
+		recipeId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Recipe",
+			default: null
+		},
 		name: {
 			type: "String",
 			default: ""
