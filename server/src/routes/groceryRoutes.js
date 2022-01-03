@@ -40,24 +40,22 @@ router.post("/groceries/ingredients", async (req, res) => {
 	}
 });
 
-router.post("/groceries", async (req, res) => {
-	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
+router.post("/groceries/create", async (req, res) => {
+	const { groceryQuantity, groceryWeightUnit, groceryName } = req.body;
 
-	if (!recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
+	if (!groceryQuantity || !groceryWeightUnit || !groceryName) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
 
 	try {
-		const recipe = new Grocery({
-			name: recipeName,
-			style: recipeStyle,
-			preparationTime: recipePreparationTime,
-			cookTime: recipeCookTime,
-			ingredients: ingredients,
+		const groceryItem = new Grocery({
+			quantity: groceryQuantity,
+			weightUnit: groceryWeightUnit,
+			name: groceryName,
 			userId: req.user._id
 		});
-		await recipe.save();
-		res.send(recipe);
+		await groceryItem.save();
+		res.send();
 	} catch (err) {
 		return res.status(422).send({ error: err.message });
 	}
