@@ -6,6 +6,7 @@ import RecipeCreateScreen from "./src/screens/RecipeCreateScreen";
 import RecipeUpdateScreen from "./src/screens/RecipeUpdateScreen";
 import RecipeListScreen from "./src/screens/RecipeListScreen";
 import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
+import GroceryCreateScreen from "./src/screens/GroceryCreateScreen";
 import GroceryListScreen from "./src/screens/GroceryListScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -28,7 +29,8 @@ const recipeListFlow = createStackNavigator({
 });
 
 const groceryListFlow = createStackNavigator({
-	GroceryList: GroceryListScreen
+	GroceryList: GroceryListScreen,
+	GroceryCreate: GroceryCreateScreen
 });
 
 recipeListFlow.navigationOptions = {
