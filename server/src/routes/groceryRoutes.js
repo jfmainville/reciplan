@@ -61,44 +61,15 @@ router.post("/groceries/create", async (req, res) => {
 	}
 });
 
-router.put("/groceries/update/:id", (req, res) => {
-	const recipeId = req.params.id;
-	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
+router.delete("/groceries/delete/:name", async (req, res) => {
+	const groceryName = req.params.name;
 
-	if (!recipeId || !recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
+	if (!groceryName) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
 
 	try {
-		Grocery.findById(recipeId, async (err, recipe) => {
-			if (!recipe)
-				return res.status(422).send({ error: err.message });
-			else {
-				recipe.name = recipeName;
-				recipe.style = recipeStyle;
-				recipe.preparationTime = recipePreparationTime;
-				recipe.cookTime = recipeCookTime;
-				recipe.ingredients = ingredients;
-				recipe.userId = req.user._id;
-
-				await recipe.save();
-			}
-			res.send(recipe);
-		});
-	} catch (err) {
-		return res.status(422).send({ error: err.message });
-	}
-});
-
-router.delete("/groceries/delete/:id", async (req, res) => {
-	const recipeId = req.params.id;
-
-	if (!recipeId) {
-		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
-	}
-
-	try {
-		await Grocery.deleteOne({ _id: recipeId });
+		await Grocery.deleteMany({ name: groceryName, userId: req.user._id });
 		res.send();
 	} catch (err) {
 		return res.status(422).send({ error: err.message });
