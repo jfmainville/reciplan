@@ -5,14 +5,10 @@ const groceryReducer = (state, action) => {
 	switch (action.type) {
 		case "fetch_groceries":
 			return action.payload;
-		case "update_grocery":
-			return state.map((recipe) => {
-				return recipe._id === action.payload._id
-					? action.payload
-					: recipe;
-			});
 		case "delete_grocery":
-			return state.filter((recipe) => recipe._id !== action.payload);
+			return state.filter((grocery) => grocery.name !== action.payload);
+		case "check_grocery":
+			return state.map(grocery => action.payload.find(({ _id }) => _id === grocery._id) || grocery);
 		default:
 			return state;
 	}
@@ -40,14 +36,10 @@ const createGrocery = () => async (groceryQuantity, groceryWeightUnit, groceryNa
 	}
 };
 
-const updateGrocery = (dispatch) => async (recipeId, recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
-	await recipeApi.put(`/groceries/update/${recipeId}`, {
-		recipeName,
-		recipeStyle,
-		recipePreparationTime,
-		recipeCookTime,
-		ingredients
-	});
+const deleteGrocery = (dispatch) => async (groceryName) => {
+	await recipeApi.delete(`/groceries/delete/${groceryName}`);
+	dispatch({ type: "delete_grocery", payload: groceryName });
+};
 
 	dispatch({
 		type: "update_recipe", payload: {
