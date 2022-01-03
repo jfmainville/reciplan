@@ -41,28 +41,16 @@ const deleteGrocery = (dispatch) => async (groceryName) => {
 	dispatch({ type: "delete_grocery", payload: groceryName });
 };
 
-	dispatch({
-		type: "update_recipe", payload: {
-			recipeName,
-			recipeStyle,
-			recipePreparationTime,
-			recipeCookTime,
-			ingredients
-		}
+const checkGrocery = (dispatch) => async (groceryName, groceryCheck) => {
+	const response = await recipeApi.post("/groceries/check", {
+		groceryName,
+		groceryCheck
 	});
-
-	if (callback) {
-		callback();
-	}
-};
-
-const deleteGrocery = (dispatch) => async (recipeId) => {
-	await recipeApi.delete(`/groceries/delete/${recipeId}`);
-	dispatch({ type: "delete_recipe", payload: recipeId });
+	dispatch({ type: "check_grocery", payload: response.data });
 };
 
 export const { Provider, Context } = createDataContext(
 	groceryReducer,
-	{ fetchGroceries, addRecipeIngredients, createGrocery, updateGrocery, deleteGrocery },
+	{ fetchGroceries, addRecipeIngredients, createGrocery, deleteGrocery, checkGrocery },
 	[]
 );
