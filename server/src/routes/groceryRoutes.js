@@ -76,4 +76,25 @@ router.delete("/groceries/delete/:name", async (req, res) => {
 	}
 });
 
+router.post("/groceries/check", async (req, res) => {
+	const { groceryName, groceryCheck } = req.body;
+
+	if (!groceryName) {
+		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
+	}
+
+	try {
+		await Grocery.updateMany(
+			{ name: groceryName, userId: req.user._id },
+			{ $set: { checked: groceryCheck } }
+		)
+		;
+
+		const updatedGroceries = await Grocery.find({ name: groceryName, checked: groceryCheck, userId: req.user._id });
+		res.send(updatedGroceries);
+	} catch (err) {
+		return res.status(422).send({ error: err.message });
+	}
+});
+
 module.exports = router;
