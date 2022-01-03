@@ -29,13 +29,11 @@ const addRecipeIngredients = () => async (recipe) => {
 	});
 };
 
-const createGrocery = () => async (recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
-	await recipeApi.post("/groceries", {
-		recipeName,
-		recipeStyle,
-		recipePreparationTime,
-		recipeCookTime,
-		ingredients
+const createGrocery = () => async (groceryQuantity, groceryWeightUnit, groceryName, callback) => {
+	await recipeApi.post("/groceries/create", {
+		groceryQuantity,
+		groceryWeightUnit,
+		groceryName
 	});
 	if (callback) {
 		callback();
