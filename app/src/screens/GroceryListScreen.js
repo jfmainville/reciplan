@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Context as GroceryContext } from "../context/GroceryContext";
-import { SafeAreaView } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import SwipeableRow from "../components/SwipeableRow";
 
@@ -38,32 +37,30 @@ const GroceryListScreen = ({ navigation }) => {
 	}, []);
 
 	return (
-		<SafeAreaView style={styles.container}>
-			<FlatList
-				showsHorizontalScrollIndicator={false}
-				showsVerticalScrollIndicator={false}
-				data={ingredients}
-				keyExtractor={(item) => item._id}
-				renderItem={({ item }) => {
-					return (
-						<SwipeableRow
-							leftButtonColor={"#2f9d25"}
-							leftButtonIcon={"check"}
-							leftButtonAction={() => checkGrocery(item.name, !item.checked)}
-							rightButtonColor={"#ee3d3d"}
-							rightButtonIcon={"trash"}
-							rightButtonAction={() => deleteGrocery(item.name)}
-						>
-							<View style={styles.card}>
-								{item.checked ?
-									<Text style={{ fontSize: 20, color: "green" }}>{item.quantity}{item.weightUnit} {item.name}</Text>
-									: <Text style={{ fontSize: 20, color: "red" }}>{item.quantity}{item.weightUnit} {item.name}</Text>}
-							</View>
-						</SwipeableRow>
-					);
-				}}
-			/>
-		</SafeAreaView>
+		<FlatList
+			showsHorizontalScrollIndicator={false}
+			showsVerticalScrollIndicator={false}
+			data={ingredients}
+			keyExtractor={(item) => item._id}
+			renderItem={({ item }) => {
+				return (
+					<SwipeableRow
+						leftButtonColor={"#2f9d25"}
+						leftButtonIcon={"check"}
+						leftButtonAction={() => checkGrocery(item.name, !item.checked)}
+						rightButtonColor={"#ee3d3d"}
+						rightButtonIcon={"trash"}
+						rightButtonAction={() => deleteGrocery(item.name)}
+					>
+						<View style={styles.card}>
+							{item.checked ?
+								<Text style={{ fontSize: 20, color: "green" }}>{item.quantity}{item.weightUnit} {item.name}</Text>
+								: <Text style={{ fontSize: 20, color: "red" }}>{item.quantity}{item.weightUnit} {item.name}</Text>}
+						</View>
+					</SwipeableRow>
+				);
+			}}
+		/>
 	);
 };
 
@@ -86,9 +83,6 @@ GroceryListScreen.navigationOptions = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1
-	},
 	card: {
 		flex: 1,
 		height: 80,
