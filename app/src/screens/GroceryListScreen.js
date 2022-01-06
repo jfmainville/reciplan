@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native
 import { Context as GroceryContext } from "../context/GroceryContext";
 import { SafeAreaView } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
-import { Button, ListItem } from "react-native-elements";
+import SwipeableRow from "../components/SwipeableRow";
 
 const GroceryListScreen = ({ navigation }) => {
 	const { state, fetchGroceries, deleteGrocery, checkGrocery } = useContext(GroceryContext);
@@ -46,30 +46,20 @@ const GroceryListScreen = ({ navigation }) => {
 				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => {
 					return (
-						<ListItem.Swipeable
-							leftContent={
-								<Button
-									title="Done"
-									icon={{ name: "check", color: "white" }}
-									buttonStyle={{ minHeight: "100%" }}
-									onPress={() => checkGrocery(item.name, !item.checked)}
-								/>
-							}
-							rightContent={
-								<Button
-									title="Delete"
-									icon={{ name: "delete", color: "white" }}
-									buttonStyle={{ minHeight: "100%", backgroundColor: "red" }}
-									onPress={() => deleteGrocery(item.name)}
-								/>
-							}
+						<SwipeableRow
+							leftButtonColor={"#2f9d25"}
+							leftButtonIcon={"check"}
+							leftButtonAction={() => checkGrocery(item.name, !item.checked)}
+							rightButtonColor={"#ee3d3d"}
+							rightButtonIcon={"trash"}
+							rightButtonAction={() => deleteGrocery(item.name)}
 						>
 							<View style={styles.card}>
 								{item.checked ?
 									<Text style={{ fontSize: 20, color: "green" }}>{item.quantity}{item.weightUnit} {item.name}</Text>
 									: <Text style={{ fontSize: 20, color: "red" }}>{item.quantity}{item.weightUnit} {item.name}</Text>}
 							</View>
-						</ListItem.Swipeable>
+						</SwipeableRow>
 					);
 				}}
 			/>
@@ -101,8 +91,11 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		flex: 1,
+		height: 80,
+		paddingVertical: 10,
+		paddingHorizontal: 20,
 		justifyContent: "center",
-		height: 40,
+		backgroundColor: "white",
 	},
 	icon: {
 		color: "white",
