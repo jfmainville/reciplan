@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import { Button, ListItem, Text } from "react-native-elements";
+import { Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { Context as GroceryContext } from "../context/GroceryContext";
 import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaView } from "react-navigation";
+import SwipeableRow from "../components/SwipeableRow";
+import { RectButton } from "react-native-gesture-handler";
 
 const RecipeListScreen = ({ navigation }) => {
 	const { state, fetchRecipes, deleteRecipe } = useContext(RecipeContext);
@@ -33,33 +35,23 @@ const RecipeListScreen = ({ navigation }) => {
 				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => {
 					return (
-						<ListItem.Swipeable
-							leftContent={
-								<Button
-									title="Add"
-									icon={{ name: "add", color: "white" }}
-									buttonStyle={{ minHeight: "100%" }}
-									onPress={() => addRecipeIngredients(item)}
-								/>
-							}
-							rightContent={
-								<Button
-									title="Delete"
-									icon={{ name: "delete", color: "white" }}
-									buttonStyle={{ minHeight: "100%", backgroundColor: "red" }}
-									onPress={() => deleteRecipe(item._id)}
-								/>
-							}
+						<SwipeableRow
+							leftButtonColor={"#497afc"}
+							leftButtonIcon={"calendar"}
+							leftButtonAction={() => addRecipeIngredients(item)}
+							rightButtonColor={"#ee3d3d"}
+							rightButtonIcon={"trash"}
+							rightButtonAction={() => deleteRecipe(item._id)}
 						>
-							<TouchableOpacity
+							<RectButton
 								style={styles.card}
 								onPress={() => navigation.navigate("RecipeDetail", { id: item._id })}
 							>
 								<Text h4>{item.name}</Text>
 								<Text>{item.preparationTime} min.</Text>
 								<Text>{item.cookTime} min.</Text>
-							</TouchableOpacity>
-						</ListItem.Swipeable>
+							</RectButton>
+						</SwipeableRow>
 					);
 				}}
 			/>
@@ -91,7 +83,12 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		flex: 1,
-		height: 80,
+		height: 100,
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		justifyContent: "space-between",
+		flexDirection: "column",
+		backgroundColor: "white",
 	},
 	icon: {
 		color: "white",
