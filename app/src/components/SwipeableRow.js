@@ -34,11 +34,11 @@ const SwipeableRow = ({
 			extrapolate: "clamp",
 		});
 		return (
-			<RectButton style={[styles.leftAction, { backgroundColor: leftButtonColor }]}>
-				<Animated.Text
-					style={[styles.actionText, { transform: [{ translateX: trans }] }]}
-					onPress={onLeftAction}
-				>
+			<RectButton
+				style={[styles.leftAction, { backgroundColor: leftButtonColor }]}
+				onPress={onLeftAction}
+			>
+				<Animated.Text style={[styles.actionText, { transform: [{ translateX: trans }] }]}>
 					<FontAwesome style={styles.actionText} name={leftButtonIcon} size={40}/>
 				</Animated.Text>
 			</RectButton>
