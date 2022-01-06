@@ -54,8 +54,8 @@ const GroceryListScreen = ({ navigation }) => {
 					>
 						<View style={styles.card}>
 							{item.checked ?
-								<Text style={{ fontSize: 20, color: "green" }}>{item.quantity}{item.weightUnit} {item.name}</Text>
-								: <Text style={{ fontSize: 20, color: "red" }}>{item.quantity}{item.weightUnit} {item.name}</Text>}
+								<Text style={styles.checkedItems}>{item.quantity}{item.weightUnit} {item.name}</Text>
+								: <Text style={styles.notCheckedItems}>{item.quantity}{item.weightUnit} {item.name}</Text>}
 						</View>
 					</SwipeableRow>
 				);
@@ -90,6 +90,16 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		justifyContent: "center",
 		backgroundColor: "white",
+	},
+	checkedItems: {
+		fontSize: 20,
+		color: "lightgray",
+		textDecorationLine: "line-through",
+		textDecorationStyle: "solid"
+	},
+	notCheckedItems: {
+		fontSize: 20,
+		color: "black"
 	},
 	icon: {
 		color: "white",
