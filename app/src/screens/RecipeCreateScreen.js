@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-import RecipeForm from "../components/RecipeForm";
 import { Context as RecipeContext } from "../context/RecipeContext";
+import RecipeMultiStepsForm from "../components/RecipeMultiStepsForm";
 
 const RecipeCreateScreen = ({ navigation }) => {
 	const { createRecipe } = useContext(RecipeContext);
 
 	return (
-		<RecipeForm
+		<RecipeMultiStepsForm
 			onSubmit={(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients) => createRecipe(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}
 		/>
 	);
