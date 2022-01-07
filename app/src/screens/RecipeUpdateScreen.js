@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet } from "react-native";
-import RecipeForm from "../components/RecipeForm";
 import { Context as RecipeContext } from "../context/RecipeContext";
+import RecipeMultiStepsForm from "../components/RecipeMultiStepsForm";
 
 const RecipeUpdateScreen = ({ navigation }) => {
 	const { state: recipes, updateRecipe } = useContext(RecipeContext);
@@ -9,7 +9,7 @@ const RecipeUpdateScreen = ({ navigation }) => {
 	const recipe = recipes.find(recipe => recipe._id === recipeId);
 
 	return (
-		<RecipeForm
+		<RecipeMultiStepsForm
 			initialValues={{
 				_id: recipeId,
 				name: recipe.name,
