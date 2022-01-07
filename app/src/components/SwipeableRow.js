@@ -33,16 +33,18 @@ const SwipeableRow = ({
 			outputRange: [-20, 0, 0, 1],
 			extrapolate: "clamp",
 		});
-		return (
-			<RectButton
-				style={[styles.leftAction, { backgroundColor: leftButtonColor }]}
-				onPress={onLeftAction}
-			>
-				<Animated.Text style={[styles.actionText, { transform: [{ translateX: trans }] }]}>
-					<FontAwesome style={styles.actionText} name={leftButtonIcon} size={40}/>
-				</Animated.Text>
-			</RectButton>
-		);
+		if (leftButtonAction) {
+			return (
+				<RectButton
+					style={[styles.leftAction, { backgroundColor: leftButtonColor }]}
+					onPress={onLeftAction}
+				>
+					<Animated.Text style={[styles.actionText, { transform: [{ translateX: trans }] }]}>
+						<FontAwesome style={styles.actionText} name={leftButtonIcon} size={40}/>
+					</Animated.Text>
+				</RectButton>
+			);
+		}
 	};
 
 	const renderRightAction = (x, progress: Animated.AnimatedInterpolation) => {
@@ -50,17 +52,18 @@ const SwipeableRow = ({
 			inputRange: [0, 1],
 			outputRange: [x, 1],
 		});
-
-		return (
-			<Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
-				<RectButton
-					style={[styles.rightAction, { backgroundColor: rightButtonColor }]}
-					onPress={onRightAction}
-				>
-					<FontAwesome style={styles.actionText} name={rightButtonIcon} size={40}/>
-				</RectButton>
-			</Animated.View>
-		);
+		if (rightButtonAction) {
+			return (
+				<Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
+					<RectButton
+						style={[styles.rightAction, { backgroundColor: rightButtonColor }]}
+						onPress={onRightAction}
+					>
+						<FontAwesome style={styles.actionText} name={rightButtonIcon} size={40}/>
+					</RectButton>
+				</Animated.View>
+			);
+		}
 	};
 
 	const renderRightActions = (
