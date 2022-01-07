@@ -4,6 +4,7 @@ import { Button, Input, ListItem, Text } from "react-native-elements";
 import Spacer from "./Spacer";
 import ObjectID from "bson-objectid";
 import { Context as IngredientContext } from "../context/IngredientContext";
+import SwipeableRow from "./SwipeableRow";
 
 const RecipeForm = ({ initialValues, onSubmit }) => {
 	const { state: { foundIngredient }, searchIngredient, resetIngredient } = useContext(IngredientContext);
@@ -101,20 +102,17 @@ const RecipeForm = ({ initialValues, onSubmit }) => {
 			keyExtractor={item => item._id}
 			renderItem={({ item }) => {
 				return (
-					<View style={styles.card}>
-						<ListItem.Swipeable
-							rightContent={
-								<Button
-									title="Delete"
-									icon={{ name: "delete", color: "white" }}
-									buttonStyle={{ minHeight: "100%", backgroundColor: "red" }}
-									onPress={() => onDeleteIngredient(item._id)}
-								/>
-							}
-						>
+					<SwipeableRow
+						rightButtonColor={"#ee3d3d"}
+						rightButtonIcon={"trash"}
+						rightButtonAction={() => onDeleteIngredient(item._id)}
+					>
+						<View style={styles.card}>
+
 							<Text style={{ fontSize: 20 }}>{item.quantity}{item.weightUnit} {item.name}</Text>
-						</ListItem.Swipeable>
-					</View>
+						</View>
+					</SwipeableRow>
+
 				);
 			}}
 		/>
@@ -137,8 +135,13 @@ const styles = StyleSheet.create({
 		backgroundColor: "#F49301",
 	},
 	card: {
-		flex: 1
-	}
+		flex: 1,
+		height: 80,
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		justifyContent: "center",
+		backgroundColor: "white",
+	},
 });
 
 export default RecipeForm;
