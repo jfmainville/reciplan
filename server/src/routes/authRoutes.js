@@ -9,8 +9,11 @@ const router = express.Router();
 router.post("/signup", async (req, res) => {
 	const { email, password } = req.body;
 
+	// Cleanup the email address
+	const cleanEmail = (email.toLowerCase()).trim();
+
 	try {
-		const user = new User({ email, password });
+		const user = new User({ email: cleanEmail, password });
 		await user.save();
 
 		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
