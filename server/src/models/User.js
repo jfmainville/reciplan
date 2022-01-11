@@ -10,6 +10,19 @@ const userSchema = new mongoose.Schema({
 		password: {
 			type: String,
 			required: true
+		},
+		lastLogin: {
+			type: Date,
+			default: Date.now()
+		},
+		active: {
+			type: Boolean,
+			default: true
+		},
+		subscriptionId: {
+			type: String,
+			// Default subscription (free)
+			default: "3aefad4f-b4c4-43b4-b821-86d02be8c8ec"
 		}
 	},
 	{
