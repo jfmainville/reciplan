@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, TouchableOpacity, FlatList, Image, View } from "react-native";
 import { Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { Context as GroceryContext } from "../context/GroceryContext";
@@ -47,9 +47,25 @@ const RecipeListScreen = ({ navigation }) => {
 								style={styles.card}
 								onPress={() => navigation.navigate("RecipeDetail", { id: item._id })}
 							>
-								<Text h4>{item.name}</Text>
-								<Text>{item.preparationTime} min.</Text>
-								<Text>{item.cookTime} min.</Text>
+								<View style={{ height: 100, flexDirection: "row" }}>
+									{item.image ?
+										<View style={{ flex: 1 }}>
+											<Image
+												style={{ flex: 1 }}
+												source={{ uri: item.image }}
+											/>
+
+										</View> :
+										<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+											<FontAwesome style={styles.missingImage} name="image" size={60}/>
+										</View>
+									}
+									<View style={{ flex: 3, marginLeft: 10, justifyContent: "center" }}>
+										<Text h4>{item.name}</Text>
+										<Text>{item.preparationTime} min.</Text>
+										<Text>{item.cookTime} min.</Text>
+									</View>
+								</View>
 							</RectButton>
 						</SwipeableRow>
 					);
@@ -84,11 +100,10 @@ const styles = StyleSheet.create({
 	card: {
 		flex: 1,
 		height: 100,
-		paddingVertical: 10,
-		paddingHorizontal: 20,
-		justifyContent: "space-between",
-		flexDirection: "column",
 		backgroundColor: "white",
+	},
+	missingImage: {
+		color: "lightgrey"
 	},
 	icon: {
 		color: "white",
