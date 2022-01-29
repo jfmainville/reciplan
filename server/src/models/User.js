@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
 			type: String,
 			required: true
 		},
+		language: {
+			type: String,
+			required: true,
+			default: "en_US"
+		},
 		lastLogin: {
 			type: Date,
 			default: Date.now()
