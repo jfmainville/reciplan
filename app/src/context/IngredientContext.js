@@ -3,7 +3,7 @@ import recipeApi from "../api/recipe";
 
 const ingredientReducer = (state, action) => {
 	switch (action.type) {
-		case "search_ingredient":
+		case "create_ingredient":
 			return { ...state, foundIngredient: action.payload };
 		case "reset_ingredient":
 			return { ...state, foundIngredient: [] };
@@ -12,8 +12,8 @@ const ingredientReducer = (state, action) => {
 	}
 };
 
-const searchIngredient = (dispatch) => async (ingredientName) => {
-	const response = await recipeApi.post("/ingredients", {
+const createIngredient = (dispatch) => async (ingredientName) => {
+	const response = await recipeApi.post("/ingredients/create", {
 		ingredientName
 	});
 	dispatch({ type: "search_ingredient", payload: response.data });
@@ -25,6 +25,6 @@ const resetIngredient = (dispatch) => () => {
 
 export const { Provider, Context } = createDataContext(
 	ingredientReducer,
-	{ searchIngredient, resetIngredient },
+	{ createIngredient, resetIngredient },
 	{ foundIngredient: [] }
 );
