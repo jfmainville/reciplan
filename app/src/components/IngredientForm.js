@@ -1,47 +1,29 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import ObjectID from "bson-objectid";
 import { Context as IngredientContext } from "../context/IngredientContext";
 import SwipeableRow from "./SwipeableRow";
-import DropDownPicker from "react-native-dropdown-picker";
 
 const IngredientForm = ({ ingredients, setIngredients }) => {
-	const { state: { foundIngredient }, searchIngredient, resetIngredient } = useContext(IngredientContext);
-	const [ingredient, setIngredient] = useState("");
+	const { createIngredient, resetIngredient } = useContext(IngredientContext);
 	const [ingredientName, setIngredientName] = useState("");
 	const [ingredientQuantity, setIngredientQuantity] = useState("");
 
-	const [open, setOpen] = useState(false);
-	const [items, setItems] = useState([
-		{ label: "Apple", value: "apple" },
-		{ label: "Banana", value: "banana" }
-	]);
-
-	useEffect(() => {
-		searchIngredient(ingredientName);
-	}, [ingredientName]);
-
-	const onSearchIngredient = (ingredient) => {
-		if (ingredient) {
-			setIngredientName(ingredient);
-		}
-	};
 	const onAddIngredient = (ingredientQuantity, ingredientName) => {
 		if (ingredientQuantity && ingredientName) {
+			createIngredient(ingredientName)
 			const ingredientUnit = ingredientQuantity.split(/([0-9]+)/)[2].trim();
+			setIngredients(ingredients => [...ingredients, {
+				_id: ObjectID(),
+				name: ingredientName,
+				quantity: parseInt(ingredientQuantity),
+				weightUnit: ingredientUnit
+			}]);
 
-			if (foundIngredient.length > 0) {
-				setIngredients(ingredients => [...ingredients, {
-					_id: ObjectID(),
-					name: foundIngredient[0].name,
-					quantity: parseInt(ingredientQuantity),
-					weightUnit: ingredientUnit
-				}]);
-				setIngredientQuantity("");
-				setIngredientName("");
-				resetIngredient();
-			}
+			setIngredientQuantity("");
+			setIngredientName("");
+			resetIngredient();
 		}
 	};
 
@@ -52,7 +34,7 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 	return (
 		<FlatList
 			ListHeaderComponent={
-				<View>
+				<>
 					<View style={{
 						flex: 1,
 						flexDirection: "row",
@@ -60,33 +42,22 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 					}}>
 						<View style={{ flex: 2 }}>
 							<Input
-								inputContainerStyle={{ flex: 1 }}
 								label="Quantity"
 								value={ingredientQuantity}
 								onChangeText={(text) => setIngredientQuantity(text)}
 							/>
 						</View>
 						<View style={{
-							flex: 3,
-							position: "relative",
-							zIndex: 1
+							flex: 3
 						}}>
-							<DropDownPicker
-								searchable={true}
-								onChangeSearchText={(text) => onSearchIngredient(text)}
-								open={open}
+							<Input
+								label="Ingredient"
 								value={ingredientName}
-								items={items}
-								setOpen={setOpen}
-								setValue={setIngredientName}
-								setItems={setItems}
-								listMode="SCROLLVIEW"
-								zIndex={1000}
+								onChangeText={(text) => setIngredientName(text)}
 							/>
 						</View>
 						<View style={{
-							flex: 1, position: "relative",
-							zIndex: 10,
+							flex: 1,
 						}}>
 							<Button
 								title="+"
@@ -94,8 +65,7 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 							/>
 						</View>
 					</View>
-
-				</View>
+				</>
 			}
 			data={ingredients}
 			keyExtractor={item => item._id}
