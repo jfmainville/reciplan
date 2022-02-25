@@ -67,6 +67,8 @@ router.post("/ingredients/create", async (req, res) => {
                         await ingredient.save();
                         res.send(ingredient);
                     }
+                } else {
+                    res.send(doc)
                 }
             })
         } catch (err) {
