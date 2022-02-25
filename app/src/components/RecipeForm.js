@@ -3,17 +3,17 @@ import { View, StyleSheet } from "react-native";
 import { Button, Input } from "react-native-elements";
 
 const RecipeForm = ({
-	selectedIndex,
-	setSelectedIndex,
-	recipeName,
-	recipeStyle,
-	recipePreparationTime,
-	recipeCookTime,
-	setRecipeName,
-	setRecipeStyle,
-	setRecipePreparationTime,
-	setRecipeCookTime
-}) => {
+	                    selectedIndex,
+	                    setSelectedIndex,
+	                    recipeName,
+	                    recipeStyle,
+	                    recipePreparationTime,
+	                    recipeCookTime,
+	                    setRecipeName,
+	                    setRecipeStyle,
+	                    setRecipePreparationTime,
+	                    setRecipeCookTime
+                    }) => {
 
 	const onNextStep = (recipeName, recipeStyle, recipePreparationTime, recipeCookTime) => {
 		if (recipeName && recipeStyle && recipePreparationTime && recipeCookTime)
