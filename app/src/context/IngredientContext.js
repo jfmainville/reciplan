@@ -4,9 +4,9 @@ import recipeApi from "../api/recipe";
 const ingredientReducer = (state, action) => {
 	switch (action.type) {
 		case "create_ingredient":
-			return { ...state, foundIngredient: action.payload };
+			return { ...state, ingredient: action.payload };
 		case "reset_ingredient":
-			return { ...state, foundIngredient: [] };
+			return { ...state, ingredient: "" };
 		default:
 			return state;
 	}
@@ -26,5 +26,5 @@ const resetIngredient = (dispatch) => () => {
 export const { Provider, Context } = createDataContext(
 	ingredientReducer,
 	{ createIngredient, resetIngredient },
-	{ foundIngredient: [] }
+	{ ingredient: "" }
 );
