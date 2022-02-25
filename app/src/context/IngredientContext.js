@@ -16,7 +16,7 @@ const createIngredient = (dispatch) => async (ingredientName) => {
 	const response = await recipeApi.post("/ingredients/create", {
 		ingredientName
 	});
-	dispatch({ type: "search_ingredient", payload: response.data });
+	dispatch({ type: "create_ingredient", payload: response.data });
 };
 
 const resetIngredient = (dispatch) => () => {
