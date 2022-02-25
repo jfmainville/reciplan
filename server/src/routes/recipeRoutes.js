@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const requireAuth = require("../middlewares/requireAuth");
 
 const Recipe = mongoose.model("Recipe");
+const Ingredient = mongoose.model("Ingredient");
 
 const router = express.Router();
 
@@ -19,6 +20,18 @@ router.post("/recipes/create", async (req, res) => {
 
 	if (!recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
+	}
+
+	for (const ingredient of ingredients) {
+		try {
+			Ingredient.findOne({ 'translations.singular': (ingredient["name"]).toLowerCase() }, (err, doc) => {
+				if (doc) {
+					ingredient["name"] = doc["name"]
+				}
+			})
+		} catch (err) {
+			return res.status(422).send({ error: err.message });
+		}
 	}
 
 	try {
@@ -43,6 +56,18 @@ router.put("/recipes/update/:id", (req, res) => {
 
 	if (!recipeId || !recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
+	}
+
+	for (const ingredient of ingredients) {
+		try {
+			Ingredient.findOne({ 'translations.singular': (ingredient["name"]).toLowerCase() }, (err, doc) => {
+				if (doc) {
+					ingredient["name"] = doc["name"]
+				}
+			})
+		} catch (err) {
+			return res.status(422).send({ error: err.message });
+		}
 	}
 
 	try {
