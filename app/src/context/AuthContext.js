@@ -80,8 +80,19 @@ const signout = (dispatch) => async () => {
 	navigate("loginFlow");
 };
 
+const deleteAccount = (dispatch) => async () => {
+	const email = await AsyncStorage.getItem("email")
+	await recipeApi.post("/user/delete", { email });
+
+	await AsyncStorage.removeItem("token");
+	await AsyncStorage.removeItem("email");
+	dispatch({ type: "signout" });
+
+	navigate("loginFlow");
+};
+
 export const { Provider, Context } = createDataContext(
 	authReducer,
-	{ tryLocalSignin, signup, signin, signout, clearErrorMessage },
+	{ tryLocalSignin, signup, signin, signout, deleteAccount, clearErrorMessage },
 	{ token: null, errorMessage: "" }
 );
