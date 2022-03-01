@@ -43,6 +43,7 @@ const signup = (dispatch) => async ({ email, password }) => {
 				: NativeModules.I18nManager.localeIdentifier;
 		const response = await recipeApi.post("/signup", { email, password, deviceLanguage });
 		await AsyncStorage.setItem("token", response.data.token);
+		await AsyncStorage.setItem("email", email);
 		dispatch({ type: "signin", payload: response.data.token });
 
 		navigate("RecipeList");
@@ -59,6 +60,7 @@ const signin = (dispatch) => async ({ email, password }) => {
 	try {
 		const response = await recipeApi.post("/signin", { email, password });
 		await AsyncStorage.setItem("token", response.data.token);
+		await AsyncStorage.setItem("email", email);
 		dispatch({ type: "signin", payload: response.data.token });
 
 		navigate("RecipeList");
