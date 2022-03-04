@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import RecipeForm from "../components/RecipeForm";
 import IngredientForm from "../components/IngredientForm";
-import { Button } from "react-native-elements";
-import RecipeReviewForm from "./RecipeReviewForm";
 
 const RecipeMultiStepsForm = ({ initialValues, onSubmit }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -17,7 +15,7 @@ const RecipeMultiStepsForm = ({ initialValues, onSubmit }) => {
 	return (
 		<>
 			<SegmentedControl
-				values={["Recipe", "Ingredients", "Review"]}
+				values={["Recipe", "Ingredients"]}
 				selectedIndex={selectedIndex}
 				onChange={(event) =>
 					setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
@@ -41,24 +39,7 @@ const RecipeMultiStepsForm = ({ initialValues, onSubmit }) => {
 						ingredients={ingredients}
 						setIngredients={setIngredients}
 					/>
-					: selectedIndex === 2 ?
-						<>
-							<RecipeReviewForm
-								selectedIndex={selectedIndex}
-								setSelectedIndex={setSelectedIndex}
-								recipeName={recipeName}
-								recipeStyle={recipeStyle}
-								recipePreparationTime={recipePreparationTime}
-								recipeCookTime={recipeCookTime}
-								ingredients={ingredients}
-							/>
-							<Button
-								title="Save Recipe"
-								buttonStyle={styles.save}
-								onPress={() => onSubmit(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients)}
-							/>
-						</>
-						: null}
+					: null}
 		</>
 	);
 };
