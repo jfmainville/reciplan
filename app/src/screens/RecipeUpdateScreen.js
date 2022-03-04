@@ -18,7 +18,6 @@ const RecipeUpdateScreen = ({ navigation }) => {
 				cookTime: recipe.cookTime,
 				ingredients: recipe.ingredients
 			}}
-			onSubmit={(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients) => updateRecipe(recipeId, recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}
 		/>
 	);
 };
