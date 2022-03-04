@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { View, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import { ButtonGroup, Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
-import { FontAwesome, Entypo } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { NavigationEvents } from "react-navigation";
 
 const RecipeDetailScreen = ({ navigation }) => {
@@ -87,7 +87,7 @@ RecipeDetailScreen.navigationOptions = ({ navigation }) => {
 		headerRight: () => (
 			<View style={{ flexDirection: "row" }}>
 				<TouchableOpacity onPress={() => navigation.navigate("RecipeUpdate", { id: navigation.getParam("id") })}>
-					<FontAwesome style={styles.headerIcons} name="pencil" size={25}/>
+					<MaterialCommunityIcons style={styles.headerIcons} name="pencil" size={25}/>
 				</TouchableOpacity>
 			</View>
 		),
