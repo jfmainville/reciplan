@@ -25,11 +25,11 @@ const recipeSchema = new mongoose.Schema({
 		},
 		preparationTime: {
 			type: "Number",
-			default: ""
+			default: 0
 		},
 		cookTime: {
 			type: "Number",
-			default: ""
+			default: 0
 		},
 		ingredients: [ingredientSchema]
 	},
