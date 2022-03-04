@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import RecipeForm from "../components/RecipeForm";
 import IngredientForm from "../components/IngredientForm";
 
-const RecipeMultiStepsForm = ({ initialValues, onSubmit }) => {
+const RecipeMultiStepsForm = ({ navigation, initialValues }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [recipeName, setRecipeName] = useState(initialValues.name);
 	const [recipeStyle, setRecipeStyle] = useState(initialValues.style);
-	const [recipePreparationTime, setRecipePreparationTime] = useState((initialValues.preparationTime).toString());
-	const [recipeCookTime, setRecipeCookTime] = useState((initialValues.cookTime).toString());
+	const [recipePreparationTime, setRecipePreparationTime] = useState((initialValues.preparationTime));
+	const [recipeCookTime, setRecipeCookTime] = useState((initialValues.cookTime));
 	const [ingredients, setIngredients] = useState(initialValues.ingredients);
+
+	useEffect(() => {
+		navigation.setParams({
+			recipeName: recipeName,
+			recipeStyle: recipeStyle,
+			recipePreparationTime: recipePreparationTime,
+			recipeCookTime: recipeCookTime,
+			ingredients: ingredients
+		});
+	}, [recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients]);
 
 	return (
 		<>
@@ -23,6 +33,7 @@ const RecipeMultiStepsForm = ({ initialValues, onSubmit }) => {
 			/>
 			{selectedIndex === 0 ?
 				<RecipeForm
+					navigation={navigation}
 					selectedIndex={selectedIndex}
 					setSelectedIndex={setSelectedIndex}
 					recipeName={recipeName}
@@ -36,6 +47,7 @@ const RecipeMultiStepsForm = ({ initialValues, onSubmit }) => {
 				/>
 				: selectedIndex === 1 ?
 					<IngredientForm
+						navigation={navigation}
 						ingredients={ingredients}
 						setIngredients={setIngredients}
 					/>
