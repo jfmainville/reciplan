@@ -8,8 +8,8 @@ const RecipeMultiStepsForm = ({ navigation, initialValues }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [recipeName, setRecipeName] = useState(initialValues.name);
 	const [recipeStyle, setRecipeStyle] = useState(initialValues.style);
-	const [recipePreparationTime, setRecipePreparationTime] = useState((initialValues.preparationTime));
-	const [recipeCookTime, setRecipeCookTime] = useState((initialValues.cookTime));
+	const [recipePreparationTime, setRecipePreparationTime] = useState((initialValues.preparationTime).toString());
+	const [recipeCookTime, setRecipeCookTime] = useState((initialValues.cookTime).toString());
 	const [ingredients, setIngredients] = useState(initialValues.ingredients);
 
 	useEffect(() => {
@@ -60,8 +60,8 @@ RecipeMultiStepsForm.defaultProps = {
 	initialValues: {
 		name: "",
 		style: "",
-		preparationTime: "",
-		cookTime: "",
+		preparationTime: 0,
+		cookTime: 0,
 		ingredients: []
 	}
 };
