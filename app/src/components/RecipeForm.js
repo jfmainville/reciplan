@@ -15,8 +15,8 @@ const RecipeForm = ({
 	                    setRecipeCookTime
                     }) => {
 
-	const onNextStep = (recipeName, recipeStyle, recipePreparationTime, recipeCookTime) => {
-		if (recipeName && recipeStyle && recipePreparationTime && recipeCookTime)
+	const onNextStep = (recipeName) => {
+		if (recipeName)
 			setSelectedIndex(selectedIndex + 1);
 	};
 
