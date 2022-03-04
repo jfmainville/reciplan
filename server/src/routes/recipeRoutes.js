@@ -54,7 +54,7 @@ router.put("/recipes/update/:id", (req, res) => {
 	const recipeId = req.params.id;
 	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
 
-	if (!recipeId || !recipeName || !recipeStyle || !recipePreparationTime || !recipeCookTime || !ingredients) {
+	if (!recipeId || !recipeName || !ingredients) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
 
