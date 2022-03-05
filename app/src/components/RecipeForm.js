@@ -1,24 +1,30 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Button, Input } from "react-native-elements";
+import React, { useState, useContext, useEffect } from "react";
+import { View, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
+import { Input } from "react-native-elements";
+import { Context as RecipeContext } from "../context/RecipeContext";
 
 const RecipeForm = ({
-	                    selectedIndex,
-	                    setSelectedIndex,
 	                    recipeName,
+	                    recipeImage,
 	                    recipeStyle,
 	                    recipePreparationTime,
 	                    recipeCookTime,
 	                    setRecipeName,
+	                    setRecipeImage,
 	                    setRecipeStyle,
 	                    setRecipePreparationTime,
 	                    setRecipeCookTime
                     }) => {
+	const { state: { images }, fetchRecipeImages, cleanRecipeImages } = useContext(RecipeContext)
+	const [imageSelect, setImageSelect] = useState(recipeImage)
 
-	const onNextStep = (recipeName) => {
-		if (recipeName)
-			setSelectedIndex(selectedIndex + 1);
-	};
+	useEffect(() => {
+		if (recipeName.length >= 3) {
+			fetchRecipeImages(recipeName)
+		} else {
+			cleanRecipeImages()
+		}
+	}, [recipeName]);
 
 	return (
 		<View>
@@ -28,6 +34,32 @@ const RecipeForm = ({
 					value={recipeName}
 					onChangeText={(text) => setRecipeName(text)}
 				/>
+				<View style={{ height: 150, alignItems: "center" }}>
+					<FlatList
+						horizontal
+						showsHorizontalScrollIndicator={false}
+						data={images}
+						keyExtractor={item => item.url}
+						renderItem={({ item }) => {
+							return (
+								<View style={{ margin: 5 }}>
+									<TouchableOpacity
+										style={imageSelect === item.url ? styles.buttonSelect : styles.buttonNormal}
+										onPress={() => {
+											setRecipeImage(item.url);
+											setImageSelect(item.url);
+										}}
+									>
+										<Image
+											style={styles.image}
+											source={{ uri: item.url }}
+										/>
+									</TouchableOpacity>
+								</View>
+							);
+						}}
+					/>
+				</View>
 				<Input
 					label="Recipe Style"
 					value={recipeStyle}
@@ -44,16 +76,25 @@ const RecipeForm = ({
 					onChangeText={(text) => setRecipeCookTime(text)}
 				/>
 			</View>
-			<Button
-				title="Next"
-				buttonStyle={styles.save}
-				onPress={() => onNextStep(recipeName, recipeStyle, recipePreparationTime, recipeCookTime)}
-			/>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	buttonSelect: {
+		borderStyle: "solid",
+		borderColor: "#F49301",
+		borderWidth: 1
+	},
+	buttonNormal: {
+		borderStyle: "solid",
+		borderColor: "transparent",
+		borderWidth: 1
+	},
+	image: {
+		width: 100,
+		height: 100
+	},
 	card: {
 		flex: 1,
 		height: 80,
