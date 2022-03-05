@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const axios = require("axios");
 const requireAuth = require("../middlewares/requireAuth");
 
 const Recipe = mongoose.model("Recipe");
@@ -14,6 +15,23 @@ router.get("/recipes", async (req, res) => {
 	const recipes = await Recipe.find({ userId: req.user._id });
 	res.send(recipes);
 });
+
+router.post("/recipes/images", async (req, res) => {
+	let { recipeName } = req.body;
+	let recipeImages = []
+
+	// Extract the images based on the recipe name
+	const response = await axios.get(`${process.env.UNSPLASH_URL}/search/?client_id=${process.env.UNSPLASH_API_KEY}&photos?page=1&per_page=3&query=${recipeName}`)
+
+	response.data["photos"]["results"].map(unsplashImage => {
+		recipeImages.push({
+			_id: unsplashImage["id"],
+			url: unsplashImage["urls"]["regular"]
+		})
+	})
+
+	res.send(recipeImages)
+})
 
 router.post("/recipes/create", async (req, res) => {
 	const { recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
