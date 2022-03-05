@@ -1,22 +1,45 @@
-import React, { useState, useContext } from "react";
-import { View, TouchableOpacity, StyleSheet, FlatList } from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+import { View, TouchableOpacity, StyleSheet, FlatList, Image } from "react-native";
 import { ButtonGroup, Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { FontAwesome, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
-import { NavigationEvents } from "react-navigation";
 
 const RecipeDetailScreen = ({ navigation }) => {
-	const { state: recipes, fetchRecipes } = useContext(RecipeContext);
+	const { state: { recipes }, fetchRecipes } = useContext(RecipeContext);
 	const [menuSection, setMenuSection] = useState(0);
 	const id = navigation.getParam("id");
 	const recipe = recipes.find(recipe => recipe._id === id);
+
+	useEffect(() => {
+		fetchRecipes();
+
+		const listener = navigation.addListener("didFocus", () => {
+			fetchRecipes();
+		});
+
+		return () => {
+			listener.remove();
+		};
+	}, []);
 
 	return (
 		<FlatList
 			ListHeaderComponent={
 				<View style={styles.container}>
+					<View style={{ height: 200, flexDirection: "row" }}>
+						{recipe.image ?
+							<View style={{ flex: 1 }}>
+								<Image
+									style={{ flex: 1 }}
+									source={{ uri: recipe.image }}
+								/>
+							</View> :
+							<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+								<FontAwesome style={styles.missingImage} name="image" size={200}/>
+							</View>
+						}
+					</View>
 					<View style={styles.recipeContainer}>
-						<NavigationEvents onWillFocus={fetchRecipes}/>
 						<View>
 							<Text style={styles.recipeTitle}>{recipe.name}</Text>
 							<Text style={styles.recipeStyle}>{recipe.style}</Text>
@@ -155,6 +178,9 @@ const styles = StyleSheet.create({
 	},
 	directionsListItem: {
 		fontSize: 20
+	},
+	missingImage: {
+		color: "lightgrey"
 	},
 	headerIcons: {
 		marginRight: 10,
