@@ -43,7 +43,9 @@ const RecipeDetailScreen = ({ navigation }) => {
 							// Temporarily disable the directions section
 							disabled={[1]}
 							selectedButtonStyle={{ backgroundColor: "#FAF7F7" }}
-							buttons={[{ element: () => <Text>Ingredients</Text> }, { element: () => <Text>Directions</Text> }]}
+							buttons={[{ element: () => <Text>Ingredients</Text> }, {
+								element: () => <Text>Directions</Text>
+							}]}
 							containerStyle={{ height: 40 }}/>
 					</View>
 				</View>
@@ -86,7 +88,8 @@ RecipeDetailScreen.navigationOptions = ({ navigation }) => {
 	return {
 		headerRight: () => (
 			<View style={{ flexDirection: "row" }}>
-				<TouchableOpacity onPress={() => navigation.navigate("RecipeUpdate", { id: navigation.getParam("id") })}>
+				<TouchableOpacity
+					onPress={() => navigation.navigate("RecipeUpdate", { id: navigation.getParam("id") })}>
 					<MaterialCommunityIcons style={styles.headerIcons} name="pencil" size={25}/>
 				</TouchableOpacity>
 			</View>
