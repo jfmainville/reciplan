@@ -9,7 +9,7 @@ import SwipeableRow from "../components/SwipeableRow";
 import { RectButton } from "react-native-gesture-handler";
 
 const RecipeListScreen = ({ navigation }) => {
-	const { state, fetchRecipes, deleteRecipe } = useContext(RecipeContext);
+	const { state: { recipes }, fetchRecipes, deleteRecipe } = useContext(RecipeContext);
 	const { addRecipeIngredients } = useContext(GroceryContext);
 
 	useEffect(() => {
@@ -31,7 +31,7 @@ const RecipeListScreen = ({ navigation }) => {
 			<FlatList
 				showsHorizontalScrollIndicator={false}
 				showsVerticalScrollIndicator={false}
-				data={state}
+				data={recipes}
 				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => {
 					return (
