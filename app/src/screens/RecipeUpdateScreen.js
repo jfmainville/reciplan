@@ -5,7 +5,7 @@ import RecipeMultiStepsForm from "../components/RecipeMultiStepsForm";
 import { FontAwesome } from "@expo/vector-icons";
 
 const RecipeUpdateScreen = ({ navigation }) => {
-	const { state: recipes, updateRecipe } = useContext(RecipeContext);
+	const { state: { recipes }, updateRecipe } = useContext(RecipeContext);
 	const recipeId = navigation.getParam("id");
 	const recipe = recipes.find(recipe => recipe._id === recipeId);
 
@@ -21,6 +21,7 @@ const RecipeUpdateScreen = ({ navigation }) => {
 			initialValues={{
 				_id: recipeId,
 				name: recipe.name,
+				image: recipe.image,
 				style: recipe.style,
 				preparationTime: recipe.preparationTime,
 				cookTime: recipe.cookTime,
@@ -34,6 +35,7 @@ RecipeUpdateScreen.navigationOptions = ({ navigation }) => {
 	const updateRecipe = navigation.getParam("updateRecipe")
 	const recipeId = navigation.getParam("id")
 	const recipeName = navigation.getParam("recipeName")
+	const recipeImage = navigation.getParam("recipeImage")
 	const recipeStyle = navigation.getParam("recipeStyle")
 	const recipePreparationTime = navigation.getParam("recipePreparationTime")
 	const recipeCookTime = navigation.getParam("recipeCookTime")
@@ -42,7 +44,7 @@ RecipeUpdateScreen.navigationOptions = ({ navigation }) => {
 		headerRight: () => (
 			<View style={{ flexDirection: "row" }}>
 				<TouchableOpacity
-					onPress={() => updateRecipe(recipeId, recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}>
+					onPress={() => updateRecipe(recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}>
 					<FontAwesome style={styles.headerIcons} name="check" size={25}/>
 				</TouchableOpacity>
 			</View>
