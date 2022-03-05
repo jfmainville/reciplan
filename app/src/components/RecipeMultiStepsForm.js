@@ -7,6 +7,7 @@ import IngredientForm from "../components/IngredientForm";
 const RecipeMultiStepsForm = ({ navigation, initialValues }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [recipeName, setRecipeName] = useState(initialValues.name);
+	const [recipeImage, setRecipeImage] = useState(initialValues.image);
 	const [recipeStyle, setRecipeStyle] = useState(initialValues.style);
 	const [recipePreparationTime, setRecipePreparationTime] = useState((initialValues.preparationTime).toString());
 	const [recipeCookTime, setRecipeCookTime] = useState((initialValues.cookTime).toString());
@@ -15,12 +16,13 @@ const RecipeMultiStepsForm = ({ navigation, initialValues }) => {
 	useEffect(() => {
 		navigation.setParams({
 			recipeName: recipeName,
+			recipeImage: recipeImage,
 			recipeStyle: recipeStyle,
 			recipePreparationTime: recipePreparationTime,
 			recipeCookTime: recipeCookTime,
 			ingredients: ingredients
 		});
-	}, [recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients]);
+	}, [recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients]);
 
 	return (
 		<>
@@ -37,10 +39,12 @@ const RecipeMultiStepsForm = ({ navigation, initialValues }) => {
 					selectedIndex={selectedIndex}
 					setSelectedIndex={setSelectedIndex}
 					recipeName={recipeName}
+					recipeImage={recipeImage}
 					recipeStyle={recipeStyle}
 					recipePreparationTime={recipePreparationTime}
 					recipeCookTime={recipeCookTime}
 					setRecipeName={setRecipeName}
+					setRecipeImage={setRecipeImage}
 					setRecipeStyle={setRecipeStyle}
 					setRecipePreparationTime={setRecipePreparationTime}
 					setRecipeCookTime={setRecipeCookTime}
@@ -60,6 +64,7 @@ RecipeMultiStepsForm.defaultProps = {
 	initialValues: {
 		name: "",
 		style: "",
+		image: "",
 		preparationTime: 0,
 		cookTime: 0,
 		ingredients: []
