@@ -23,6 +23,7 @@ const RecipeCreateScreen = ({ navigation }) => {
 RecipeCreateScreen.navigationOptions = ({ navigation }) => {
 	const createRecipe = navigation.getParam("createRecipe")
 	const recipeName = navigation.getParam("recipeName")
+	const recipeImage = navigation.getParam("recipeImage")
 	const recipeStyle = navigation.getParam("recipeStyle")
 	const recipePreparationTime = navigation.getParam("recipePreparationTime")
 	const recipeCookTime = navigation.getParam("recipeCookTime")
@@ -32,7 +33,7 @@ RecipeCreateScreen.navigationOptions = ({ navigation }) => {
 		headerRight: () => (
 			<View style={{ flexDirection: "row" }}>
 				<TouchableOpacity
-					onPress={() => createRecipe(recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}>
+					onPress={() => createRecipe(recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}>
 					<FontAwesome style={styles.headerIcons} name="check" size={25}/>
 				</TouchableOpacity>
 			</View>
