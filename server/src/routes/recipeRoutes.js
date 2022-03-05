@@ -16,7 +16,7 @@ router.get("/recipes", async (req, res) => {
 });
 
 router.post("/recipes/create", async (req, res) => {
-	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
+	const { recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
 
 	if (!recipeName || !ingredients) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
@@ -38,6 +38,7 @@ router.post("/recipes/create", async (req, res) => {
 		const recipe = new Recipe({
 			name: recipeName,
 			style: recipeStyle,
+			image: recipeImage,
 			preparationTime: recipePreparationTime,
 			cookTime: recipeCookTime,
 			ingredients: ingredients,
@@ -52,8 +53,7 @@ router.post("/recipes/create", async (req, res) => {
 
 router.put("/recipes/update/:id", (req, res) => {
 	const recipeId = req.params.id;
-	const { recipeName, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
-
+	const { recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients } = req.body;
 	if (!recipeId || !recipeName || !ingredients) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
@@ -76,6 +76,7 @@ router.put("/recipes/update/:id", (req, res) => {
 				return res.status(422).send({ error: err.message });
 			else {
 				recipe.name = recipeName;
+				recipe.image = recipeImage;
 				recipe.style = recipeStyle;
 				recipe.preparationTime = recipePreparationTime;
 				recipe.cookTime = recipeCookTime;
