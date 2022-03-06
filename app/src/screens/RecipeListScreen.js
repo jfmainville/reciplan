@@ -54,7 +54,6 @@ const RecipeListScreen = ({ navigation }) => {
 												style={{ flex: 1 }}
 												source={{ uri: item.image }}
 											/>
-
 										</View> :
 										<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 											<FontAwesome style={styles.missingImage} name="image" size={60}/>
