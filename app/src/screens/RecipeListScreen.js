@@ -47,11 +47,11 @@ const RecipeListScreen = ({ navigation }) => {
 								style={styles.card}
 								onPress={() => navigation.navigate("RecipeDetail", { id: item._id })}
 							>
-								<View style={{ height: 100, flexDirection: "row" }}>
+								<View style={{ flexDirection: "row" }}>
 									{item.image ?
 										<View style={{ flex: 1 }}>
 											<Image
-												style={{ flex: 1 }}
+												style={{ height: 100, width: 100 }}
 												source={{ uri: item.image }}
 											/>
 										</View> :
