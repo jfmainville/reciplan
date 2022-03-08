@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
+import { Button, TextInput, Text } from "react-native-paper";
 import ObjectID from "bson-objectid";
 import { Context as IngredientContext } from "../context/IngredientContext";
 import SwipeableRow from "./SwipeableRow";
@@ -36,31 +36,40 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 			ListHeaderComponent={
 				<>
 					<View style={{
-						flex: 1,
+						margin: 5,
 						flexDirection: "row",
-						alignItems: "center",
+						alignItems: "center"
 					}}>
-						<View style={{ flex: 2 }}>
-							<Input
+						<View style={{ flex: 2, marginRight: 5 }}>
+							<TextInput
+								styles={styles.textInput}
+								mode="outlined"
 								label="Quantity"
 								value={ingredientQuantity}
 								onChangeText={(text) => setIngredientQuantity(text)}
 							/>
 						</View>
 						<View style={{
-							flex: 3
+							flex: 4
 						}}>
-							<Input
+							<TextInput
+								styles={styles.textInput}
+								mode="outlined"
 								label="Ingredient"
 								value={ingredientName}
 								onChangeText={(text) => setIngredientName(text)}
 							/>
 						</View>
 						<View style={{
-							flex: 1,
+							flex: 1
 						}}>
 							<Button
-								title="+"
+								style={styles.button}
+								contentStyle={{ height: 50 }}
+								labelStyle={{ fontSize: 25 }}
+								mode="contained"
+								compact
+								icon="plus"
 								onPress={() => onAddIngredient(ingredientQuantity, ingredientName)}
 							/>
 						</View>
@@ -87,6 +96,12 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 };
 
 const styles = StyleSheet.create({
+	textInput: {
+		margin: 5
+	},
+	button: {
+		margin: 5
+	},
 	card: {
 		flex: 1,
 		height: 80,
