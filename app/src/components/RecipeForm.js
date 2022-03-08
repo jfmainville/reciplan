@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
-import { Input } from "react-native-elements";
+import { TextInput } from "react-native-paper";
 import { Context as RecipeContext } from "../context/RecipeContext";
 
 const RecipeForm = ({
@@ -29,12 +29,14 @@ const RecipeForm = ({
 	return (
 		<View>
 			<View style={styles.container}>
-				<Input
+				<TextInput
+					style={styles.textInput}
+					mode="outlined"
 					label="Recipe Name"
 					value={recipeName}
 					onChangeText={(text) => setRecipeName(text)}
 				/>
-				<View style={{ height: 150, alignItems: "center" }}>
+				<View style={{ marginTop: 10, alignItems: "center" }}>
 					<FlatList
 						horizontal
 						showsHorizontalScrollIndicator={false}
@@ -60,17 +62,23 @@ const RecipeForm = ({
 						}}
 					/>
 				</View>
-				<Input
+				<TextInput
+					style={styles.textInput}
+					mode="outlined"
 					label="Recipe Style"
 					value={recipeStyle}
 					onChangeText={(text) => setRecipeStyle(text)}
 				/>
-				<Input
+				<TextInput
+					style={styles.textInput}
+					mode="outlined"
 					label="Preparation Time (minutes)"
 					value={recipePreparationTime}
 					onChangeText={(text) => setRecipePreparationTime(text)}
 				/>
-				<Input
+				<TextInput
+					style={styles.textInput}
+					mode="outlined"
 					label="Cook Time (minutes)"
 					value={recipeCookTime}
 					onChangeText={(text) => setRecipeCookTime(text)}
@@ -81,6 +89,12 @@ const RecipeForm = ({
 };
 
 const styles = StyleSheet.create({
+	container: {
+		marginTop: 10
+	},
+	textInput: {
+		margin: 5
+	},
 	buttonSelect: {
 		borderStyle: "solid",
 		borderColor: "#F49301",
@@ -92,16 +106,9 @@ const styles = StyleSheet.create({
 		borderWidth: 1
 	},
 	image: {
+		margin: 5,
 		width: 100,
-		height: 100
-	},
-	card: {
-		flex: 1,
-		height: 80,
-		paddingVertical: 10,
-		paddingHorizontal: 20,
-		justifyContent: "center",
-		backgroundColor: "white",
+		height: 100,
 	},
 });
 
