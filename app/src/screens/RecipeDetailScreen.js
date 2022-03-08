@@ -5,7 +5,7 @@ import { Context as RecipeContext } from "../context/RecipeContext";
 import { FontAwesome, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 
 const RecipeDetailScreen = ({ navigation }) => {
-	const { state: { recipes }, fetchRecipes } = useContext(RecipeContext);
+	const { state: { recipes }, fetchRecipes, cleanRecipeImages } = useContext(RecipeContext);
 	const [menuSection, setMenuSection] = useState(0);
 	const id = navigation.getParam("id");
 	const recipe = recipes.find(recipe => recipe._id === id);
@@ -15,6 +15,7 @@ const RecipeDetailScreen = ({ navigation }) => {
 
 		const listener = navigation.addListener("didFocus", () => {
 			fetchRecipes();
+			cleanRecipeImages();
 		});
 
 		return () => {
