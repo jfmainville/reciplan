@@ -3,16 +3,16 @@ import { View, StyleSheet } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Spacer from "./Spacer";
 
-const GroceryForm = ({ onSubmit }) => {
+const GroceryForm = ({ navigation }) => {
 	const [groceryQuantity, setGroceryQuantity] = useState("");
 	const [groceryName, setGroceryName] = useState("");
 
-	const onAddGroceryItem = (groceryQuantity, groceryName) => {
-		if (groceryQuantity && groceryName) {
-			const groceryWeightUnit = groceryQuantity.split(/([0-9]+)/)[2].trim();
-			onSubmit(parseInt(groceryQuantity), groceryWeightUnit, groceryName);
-		}
-	};
+	useEffect(() => {
+		navigation.setParams({
+			groceryQuantity: groceryQuantity,
+			groceryName: groceryName
+		});
+	}, [groceryQuantity, groceryName]);
 
 	return (
 		<View>
