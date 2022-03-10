@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Button, Input } from "react-native-elements";
+import { TextInput } from "react-native-paper";
 import Spacer from "./Spacer";
 
 const GroceryForm = ({ navigation }) => {
@@ -17,12 +17,16 @@ const GroceryForm = ({ navigation }) => {
 	return (
 		<View>
 			<Spacer/>
-			<Input
+			<TextInput
+				style={styles.textInput}
+				mode="outlined"
 				label="Quantity"
 				value={groceryQuantity}
 				onChangeText={(text) => setGroceryQuantity(text)}
 			/>
-			<Input
+			<TextInput
+				style={styles.textInput}
+				mode="outlined"
 				label="Ingredient Name"
 				value={groceryName}
 				onChangeText={(text) => setGroceryName(text)}
@@ -43,6 +47,9 @@ GroceryForm.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+	textInput: {
+		margin: 5
+	},
 	save: {
 		marginTop: 10,
 		backgroundColor: "#F49301",
