@@ -47,9 +47,12 @@ router.post("/groceries/create", async (req, res) => {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
 
+	const groceryQuantityUnit = groceryQuantity.split(/([0-9]+)/)[1].trim()
+	const groceryWeightUnit = groceryQuantity.split(/([0-9]+)/)[2].trim()
+
 	try {
 		const groceryItem = new Grocery({
-			quantity: groceryQuantity,
+			quantity: groceryQuantityUnit,
 			weightUnit: groceryWeightUnit,
 			name: groceryName,
 			userId: req.user._id
