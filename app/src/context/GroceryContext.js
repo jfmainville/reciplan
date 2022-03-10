@@ -25,10 +25,9 @@ const addRecipeIngredients = () => async (recipe) => {
 	});
 };
 
-const createGrocery = () => async (groceryQuantity, groceryWeightUnit, groceryName, callback) => {
+const createGrocery = () => async (groceryQuantity, groceryName, callback) => {
 	await recipeApi.post("/groceries/create", {
 		groceryQuantity,
-		groceryWeightUnit,
 		groceryName
 	});
 	if (callback) {
