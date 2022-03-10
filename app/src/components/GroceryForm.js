@@ -28,10 +28,6 @@ const GroceryForm = ({ onSubmit }) => {
 				onChangeText={(text) => setGroceryName(text)}
 			/>
 			<Spacer/>
-			<Button
-				title="Save"
-				onPress={() => onAddGroceryItem(groceryQuantity, groceryName)}
-			/>
 		</View>
 	);
 };
