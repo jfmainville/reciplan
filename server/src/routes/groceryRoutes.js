@@ -41,9 +41,9 @@ router.post("/groceries/ingredients", async (req, res) => {
 });
 
 router.post("/groceries/create", async (req, res) => {
-	const { groceryQuantity, groceryWeightUnit, groceryName } = req.body;
+	const { groceryQuantity, groceryName } = req.body;
 
-	if (!groceryQuantity || !groceryWeightUnit || !groceryName) {
+	if (!groceryQuantity || !groceryName) {
 		return res.status(422).send({ error: "You must provide all the recipe information to continue" });
 	}
 
