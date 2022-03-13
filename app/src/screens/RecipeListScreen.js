@@ -59,8 +59,13 @@ const RecipeListScreen = ({ navigation }) => {
 												source={{ uri: item.image }}
 											/>
 										</View> :
-										<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-											<FontAwesome style={styles.missingImage} name="image" size={60}/>
+										<View style={{
+											flex: 1,
+											alignItems: "center",
+											justifyContent: "center",
+											height: 100
+										}}>
+											<FontAwesome style={styles.missingImage} name="image" size={80}/>
 										</View>
 									}
 									<View style={{ flex: 3, marginLeft: 10, justifyContent: "center" }}>
@@ -84,7 +89,6 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		flex: 1,
-		height: 100,
 		backgroundColor: "white",
 	},
 	missingImage: {
