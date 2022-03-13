@@ -14,6 +14,7 @@ const RecipeListScreen = ({ navigation }) => {
 
 	useEffect(() => {
 		fetchRecipes();
+	}, [recipes]);
 
 		const listener = navigation.addListener("didFocus", () => {
 			fetchRecipes();
