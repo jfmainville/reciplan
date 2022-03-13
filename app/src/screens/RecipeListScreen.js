@@ -74,24 +74,6 @@ const RecipeListScreen = ({ navigation }) => {
 	);
 };
 
-RecipeListScreen.navigationOptions = ({ navigation }) => {
-	return {
-		headerRight: () => (
-			<TouchableOpacity onPress={() => navigation.navigate("RecipeCreate")}>
-				<FontAwesome style={styles.icon} name="plus" size={25}/>
-			</TouchableOpacity>
-		),
-		title: "Recipes",
-		headerStyle: {
-			backgroundColor: "#4854C7",
-		},
-		headerTintColor: "#fff",
-		headerTitleStyle: {
-			fontWeight: "bold",
-		},
-	};
-};
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1
