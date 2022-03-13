@@ -1,24 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import RecipeMultiStepsForm from "../components/RecipeMultiStepsForm";
 import { FontAwesome } from "@expo/vector-icons";
+import { useTheme } from "react-native-paper";
 
-const RecipeCreateScreen = ({ navigation }) => {
+const RecipeCreateScreen = ({ navigation, route }) => {
+	const { headerButtonColor } = useTheme()
 	const { createRecipe } = useContext(RecipeContext);
 
-	useEffect(() => {
-		navigation.setParams({
-			createRecipe
-		});
-	}, []);
-
-	return (
-		<RecipeMultiStepsForm
-			navigation={navigation}
-		/>
-	);
-};
+	useLayoutEffect(() => {
+		const recipeName = route.params ? route.params.recipeName : ""
+		const recipeImage = route.params ? route.params.recipeImage : ""
+		const recipeStyle = route.params ? route.params.recipeStyle : ""
+		const recipePreparationTime = route.params ? route.params.recipePreparationTime : 0
+		const recipeCookTime = route.params ? route.params.recipeCookTime : 0
+		const ingredients = route.params ? route.params.ingredients : []
 
 		navigation.setOptions({
 			headerRight: () => (
@@ -39,11 +36,6 @@ const RecipeCreateScreen = ({ navigation }) => {
 	);
 };
 
-const styles = StyleSheet.create({
-	headerIcons: {
-		marginRight: 10,
-		color: "#fff"
-	}
-});
+const styles = StyleSheet.create({});
 
 export default RecipeCreateScreen;
