@@ -12,15 +12,7 @@ const RecipeDetailScreen = ({ navigation }) => {
 
 	useEffect(() => {
 		fetchRecipes();
-
-		const listener = navigation.addListener("didFocus", () => {
-			fetchRecipes();
-			cleanRecipeImages();
-		});
-
-		return () => {
-			listener.remove();
-		};
+		cleanRecipeImages();
 	}, []);
 
 	return (
