@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 import { Context as AuthContext } from "../context/AuthContext";
 import { NavigationEvents } from "react-navigation";
 import AuthForm from "../components/AuthForm";
-import NavLink from "../components/NavLink";
 
 const SignupScreen = ({ navigation }) => {
 	const { state, signup, clearErrorMessage } = useContext(AuthContext);
@@ -19,10 +18,7 @@ const SignupScreen = ({ navigation }) => {
 				errorMessage={state.errorMessage}
 				onSubmit={signup}
 			/>
-			<NavLink
-				text="Already have an account? Sign in instead!"
-				routeName="Signin"
-			/>
+
 		</View>
 	);
 };
