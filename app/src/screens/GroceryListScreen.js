@@ -60,7 +60,8 @@ const GroceryListScreen = ({ navigation }) => {
 						<View style={styles.card}>
 							{item.checked ?
 								<Text style={styles.checkedItems}>{item.quantity}{item.weightUnit} {item.name}</Text>
-								: <Text style={styles.notCheckedItems}>{item.quantity}{item.weightUnit} {item.name}</Text>}
+								: <Text
+									style={styles.notCheckedItems}>{item.quantity}{item.weightUnit} {item.name}</Text>}
 						</View>
 					</SwipeableRow>
 				);
