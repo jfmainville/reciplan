@@ -20,36 +20,6 @@ const GroceryCreateScreen = ({ navigation }) => {
 	);
 };
 
-GroceryCreateScreen.navigationOptions = ({ navigation }) => {
-	const createGrocery = navigation.getParam("createGrocery")
-	const groceryQuantity = navigation.getParam("groceryQuantity")
-	const groceryName = navigation.getParam("groceryName")
-
-	return {
-		headerRight: () => (
-			<View style={{ flexDirection: "row" }}>
-				<TouchableOpacity
-					onPress={() => createGrocery(groceryQuantity, groceryName, () => navigation.navigate("GroceryList"))}>
-					<FontAwesome style={styles.headerIcons} name="check" size={25}/>
-				</TouchableOpacity>
-			</View>
-		),
-		title: "Add Grocery Item",
-		headerStyle: {
-			backgroundColor: "#4854C7",
-		},
-		headerTintColor: "#fff",
-		headerTitleStyle: {
-			fontWeight: "bold",
-		}
-	}
-};
-
-const styles = StyleSheet.create({
-	headerIcons: {
-		marginRight: 10,
-		color: "#fff"
-	}
-});
+const styles = StyleSheet.create({});
 
 export default GroceryCreateScreen;
