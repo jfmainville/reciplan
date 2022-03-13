@@ -140,7 +140,20 @@ function GroceryStackScreens() {
 function AccountStackScreens() {
 	return (
 		<AccountStack.Navigator>
-			<AccountStack.Screen name="AccountList" component={AccountScreen}/>
+			<AccountStack.Screen
+				name="AccountList"
+				component={AccountScreen}
+				options={{
+					title: "Account",
+					headerStyle: {
+						backgroundColor: theme.colors.primary
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
 		</AccountStack.Navigator>
 	);
 }
