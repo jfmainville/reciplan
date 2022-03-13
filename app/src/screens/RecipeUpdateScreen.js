@@ -1,19 +1,35 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import RecipeMultiStepsForm from "../components/RecipeMultiStepsForm";
 import { FontAwesome } from "@expo/vector-icons";
+import { useTheme } from "react-native-paper";
 
-const RecipeUpdateScreen = ({ navigation }) => {
+const RecipeUpdateScreen = ({ navigation, route }) => {
+	const { headerButtonColor } = useTheme()
 	const { state: { recipes }, updateRecipe } = useContext(RecipeContext);
-	const recipeId = navigation.getParam("id");
+	const recipeId = route.params.id;
 	const recipe = recipes.find(recipe => recipe._id === recipeId);
 
-	useEffect(() => {
-		navigation.setParams({
-			updateRecipe
-		});
-	}, []);
+	useLayoutEffect(() => {
+		const recipeName = route.params.recipeName
+		const recipeImage = route.params.recipeImage
+		const recipeStyle = route.params.recipeStyle
+		const recipePreparationTime = route.params.recipePreparationTime
+		const recipeCookTime = route.params.recipeCookTime
+		const ingredients = route.params.ingredients
+
+		navigation.setOptions({
+			headerRight: () => (
+				<View style={{ flexDirection: "row" }}>
+					<TouchableOpacity
+						onPress={() => updateRecipe(recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}>
+						<FontAwesome name="check" size={25} style={{ color: headerButtonColor }}/>
+					</TouchableOpacity>
+				</View>
+			)
+		})
+	})
 
 	return (
 		<RecipeMultiStepsForm
