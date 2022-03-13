@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, LogBox } from "react-native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import RecipeForm from "../components/RecipeForm";
 import IngredientForm from "../components/IngredientForm";
+
+// Ignore the non-serializable values warning which is caused by the ingredients array creation in the setParams function
+LogBox.ignoreLogs([
+	"Non-serializable values were found in the navigation stat"
+]);
 
 const RecipeMultiStepsForm = ({ navigation, initialValues }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
