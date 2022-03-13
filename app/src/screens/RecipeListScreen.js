@@ -1,14 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { StyleSheet, TouchableOpacity, FlatList, Image, View } from "react-native";
 import { Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { Context as GroceryContext } from "../context/GroceryContext";
 import { FontAwesome } from "@expo/vector-icons";
-import { SafeAreaView } from "react-navigation";
+import { useTheme } from 'react-native-paper';
 import SwipeableRow from "../components/SwipeableRow";
 import { RectButton } from "react-native-gesture-handler";
 
 const RecipeListScreen = ({ navigation }) => {
+	const { headerButtonColor } = useTheme()
 	const { state: { recipes }, fetchRecipes, deleteRecipe } = useContext(RecipeContext);
 	const { addRecipeIngredients } = useContext(GroceryContext);
 
@@ -16,14 +17,16 @@ const RecipeListScreen = ({ navigation }) => {
 		fetchRecipes();
 	}, [recipes]);
 
-		const listener = navigation.addListener("didFocus", () => {
-			fetchRecipes();
-		});
-
-		return () => {
-			listener.remove();
-		};
-	}, []);
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<TouchableOpacity
+					onPress={() => navigation.navigate("RecipeCreate")}>
+					<FontAwesome name="plus" size={25} style={{ color: headerButtonColor }}/>
+				</TouchableOpacity>
+			),
+		})
+	}, [navigation])
 
 	return (
 		<View
