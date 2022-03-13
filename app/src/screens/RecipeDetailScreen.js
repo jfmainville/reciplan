@@ -100,27 +100,6 @@ const RecipeDetailScreen = ({ navigation }) => {
 	);
 };
 
-RecipeDetailScreen.navigationOptions = ({ navigation }) => {
-	return {
-		headerRight: () => (
-			<View style={{ flexDirection: "row" }}>
-				<TouchableOpacity
-					onPress={() => navigation.navigate("RecipeUpdate", { id: navigation.getParam("id") })}>
-					<MaterialCommunityIcons style={styles.headerIcons} name="pencil" size={25}/>
-				</TouchableOpacity>
-			</View>
-		),
-		title: "Recipe",
-		headerStyle: {
-			backgroundColor: "#4854C7",
-		},
-		headerTintColor: "#fff",
-		headerTitleStyle: {
-			fontWeight: "bold",
-		},
-	};
-};
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
