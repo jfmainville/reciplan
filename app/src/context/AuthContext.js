@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform, NativeModules } from 'react-native'
 import createDataContext from "./createDataContext";
 import recipeApi from "../api/recipe";
-import { navigate } from "../navigationRef";
 
 const authReducer = (state, action) => {
 	switch (action.type) {
@@ -23,10 +22,6 @@ const tryLocalSignin = (dispatch) => async () => {
 	const token = await AsyncStorage.getItem("token");
 	if (token) {
 		dispatch({ type: "signin", payload: token });
-
-		navigate("RecipeList");
-	} else {
-		navigate("loginFlow");
 	}
 };
 
@@ -45,8 +40,6 @@ const signup = (dispatch) => async ({ email, password }) => {
 		await AsyncStorage.setItem("token", response.data.token);
 		await AsyncStorage.setItem("email", email);
 		dispatch({ type: "signin", payload: response.data.token });
-
-		navigate("RecipeList");
 	} catch (err) {
 		console.log(err);
 		dispatch({
@@ -62,8 +55,6 @@ const signin = (dispatch) => async ({ email, password }) => {
 		await AsyncStorage.setItem("token", response.data.token);
 		await AsyncStorage.setItem("email", email);
 		dispatch({ type: "signin", payload: response.data.token });
-
-		navigate("RecipeList");
 	} catch (err) {
 		dispatch({
 			type: "add_error",
@@ -76,8 +67,6 @@ const signout = (dispatch) => async () => {
 	await AsyncStorage.removeItem("token");
 	await AsyncStorage.removeItem("email");
 	dispatch({ type: "signout" });
-
-	navigate("loginFlow");
 };
 
 const deleteAccount = (dispatch) => async () => {
@@ -87,8 +76,6 @@ const deleteAccount = (dispatch) => async () => {
 	await AsyncStorage.removeItem("token");
 	await AsyncStorage.removeItem("email");
 	dispatch({ type: "signout" });
-
-	navigate("loginFlow");
 };
 
 export const { Provider, Context } = createDataContext(
