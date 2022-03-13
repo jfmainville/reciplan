@@ -1,7 +1,9 @@
-import React from "react";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import "react-native-gesture-handler";
+import React, { useContext, useEffect } from "react";
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RecipeCreateScreen from "./src/screens/RecipeCreateScreen";
 import RecipeUpdateScreen from "./src/screens/RecipeUpdateScreen";
 import RecipeListScreen from "./src/screens/RecipeListScreen";
@@ -10,68 +12,220 @@ import GroceryCreateScreen from "./src/screens/GroceryCreateScreen";
 import GroceryListScreen from "./src/screens/GroceryListScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { Context as AuthContext } from "./src/context/AuthContext";
 import { Provider as RecipeProvider } from "./src/context/RecipeContext";
 import { Provider as GroceryProvider } from "./src/context/GroceryContext";
 import { Provider as IngredientProvider } from "./src/context/IngredientContext";
-import { setNavigator } from "./src/navigationRef";
-import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { StatusBar } from "react-native";
-import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import { StatusBar, Text } from "react-native";
 import SignupScreen from "./src/screens/SignupScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 
-const recipeListFlow = createStackNavigator({
-	RecipeList: RecipeListScreen,
-	RecipeDetail: RecipeDetailScreen,
-	RecipeCreate: RecipeCreateScreen,
-	RecipeUpdate: RecipeUpdateScreen
-});
-
-const groceryListFlow = createStackNavigator({
-	GroceryList: GroceryListScreen,
-	GroceryCreate: GroceryCreateScreen
-});
-
-recipeListFlow.navigationOptions = {
-	title: "Recipes",
-	tabBarIcon: <FontAwesome5 name="book" size={20}/>
+const theme = {
+	...DefaultTheme,
+	roundness: 1,
+	colors: {
+		...DefaultTheme.colors,
+		primary: "#55c748",
+		accent: "#F49301"
+	},
+	headerTintColor: "#fff",
+	headerButtonColor: "#fff",
+	statusBarColor: "light-content"
 };
 
-groceryListFlow.navigationOptions = {
-	title: "Grocery List",
-	tabBarIcon: <FontAwesome name="shopping-cart" size={20}/>
-};
+const RecipeStack = createNativeStackNavigator();
+const GroceryStack = createNativeStackNavigator();
+const AccountStack = createNativeStackNavigator();
+const AuthenticationStack = createNativeStackNavigator();
 
-const switchNavigator = createSwitchNavigator({
-		ResolveAuth: ResolveAuthScreen,
-		loginFlow: createStackNavigator({
-			Signin: SigninScreen,
-			Signup: SignupScreen
-		}),
-		mainFlow: createBottomTabNavigator({
-			recipeListFlow,
-			groceryListFlow,
-			Account: AccountScreen
-		})
-	})
-;
-
-const App = createAppContainer(switchNavigator);
-
-export default () => {
+function RecipeStackScreens() {
 	return (
-		<SafeAreaProvider>
-			<AuthProvider>
-				<RecipeProvider>
-					<GroceryProvider>
+		<RecipeStack.Navigator>
+			<RecipeStack.Screen
+				name="RecipeList"
+				component={RecipeListScreen}
+				options={{
+					title: "Recipes",
+					headerStyle: {
+						backgroundColor: theme.colors.primary
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
+			<RecipeStack.Screen
+				name="RecipeDetail"
+				component={RecipeDetailScreen}
+				options={{
+					title: "Recipe",
+					headerStyle: {
+						backgroundColor: theme.colors.primary
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
+			<RecipeStack.Screen
+				name="RecipeCreate"
+				component={RecipeCreateScreen}
+				options={{
+					title: "Create Recipe",
+					headerStyle: {
+						backgroundColor: theme.colors.primary,
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}/>
+			<RecipeStack.Screen
+				name="RecipeUpdate"
+				component={RecipeUpdateScreen}
+				options={{
+					title: "Update Recipe",
+					headerStyle: {
+						backgroundColor: theme.colors.primary,
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
+		</RecipeStack.Navigator>
+	);
+}
+
+function GroceryStackScreens() {
+	return (
+		<GroceryStack.Navigator>
+			<GroceryStack.Screen
+				name="GroceryList"
+				component={GroceryListScreen}
+				options={{
+					title: "Groceries",
+					headerStyle: {
+						backgroundColor: theme.colors.primary
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
+			<GroceryStack.Screen
+				name="GroceryCreate"
+				component={GroceryCreateScreen}
+				options={{
+					title: "Add Grocery Item",
+					headerStyle: {
+						backgroundColor: theme.colors.primary
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
+		</GroceryStack.Navigator>
+	);
+}
+
+function AccountStackScreens() {
+	return (
+		<AccountStack.Navigator>
+			<AccountStack.Screen name="AccountList" component={AccountScreen}/>
+		</AccountStack.Navigator>
+	);
+}
+
+function AuthenticationStackScreens() {
+	return (
+		<AuthenticationStack.Navigator>
+			<AuthenticationStack.Screen name="Signin" component={SigninScreen}/>
+			<AuthenticationStack.Screen name="Signup" component={SignupScreen}/>
+		</AuthenticationStack.Navigator>
+	);
+}
+
+const Tab = createBottomTabNavigator();
+
+function BottomTabNavigator() {
+	const { state: { token, loading }, tryLocalSignin } = useContext(AuthContext)
+
+	useEffect(() => {
+		tryLocalSignin();
+	}, []);
+
+	if (loading) {
+		return (
+			<Text>Test</Text>
+		)
+	}
+
+	return (
+		<NavigationContainer>
+			{token ?
+				<Tab.Navigator screenOptions={{ headerShown: false }}>
+					<Tab.Screen
+						name="Recipes"
+						component={RecipeStackScreens}
+						options={{
+							tabBarLabel: "Recipes",
+							tabBarIcon: ({ color, size }) => (
+								<MaterialCommunityIcons name="chef-hat" color={color} size={size}/>
+							)
+						}}
+					/>
+					<Tab.Screen
+						name="Groceries"
+						component={GroceryStackScreens}
+						options={{
+							tabBarLabel: "Groceries",
+							tabBarIcon: ({ color, size }) => (
+								<MaterialCommunityIcons name="cart" color={color} size={size}/>
+							)
+						}}
+					/>
+					<Tab.Screen
+						name="Account"
+						component={AccountStackScreens}
+						options={{
+							tabBarLabel: "Account",
+							tabBarIcon: ({ color, size }) => (
+								<MaterialCommunityIcons name="account-circle" color={color} size={size}/>
+							)
+						}}
+					/>
+				</Tab.Navigator>
+				:
+				<AuthenticationStackScreens/>
+			}
+		</NavigationContainer>
+	)
+}
+
+export default function App() {
+	return (
+		<AuthProvider>
+			<PaperProvider theme={theme}>
+				<StatusBar barStyle={theme.statusBarColor}/>
+				<SafeAreaProvider>
+					<RecipeProvider>
 						<IngredientProvider>
-							<StatusBar barStyle="light-content" backgroundColor="#4854C7"/>
-							<App ref={(navigator) => setNavigator(navigator)}/>
+							<GroceryProvider>
+								<BottomTabNavigator/>
+							</GroceryProvider>
 						</IngredientProvider>
-					</GroceryProvider>
-				</RecipeProvider>
-			</AuthProvider>
-		</SafeAreaProvider>
+					</RecipeProvider>
+				</SafeAreaProvider>
+			</PaperProvider>
+		</AuthProvider>
 	);
 }
