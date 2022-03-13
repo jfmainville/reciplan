@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Context as GroceryContext } from "../context/GroceryContext";
 import { FontAwesome } from "@expo/vector-icons";
+import { useTheme } from 'react-native-paper';
 import SwipeableRow from "../components/SwipeableRow";
 
 const GroceryListScreen = ({ navigation }) => {
+	const { headerButtonColor } = useTheme()
 	const { state, fetchGroceries, deleteGrocery, checkGrocery } = useContext(GroceryContext);
 	let ingredients = [];
 	if (state.length > 0) {
@@ -27,6 +29,17 @@ const GroceryListScreen = ({ navigation }) => {
 	useEffect(() => {
 		fetchGroceries();
 	}, []);
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<TouchableOpacity
+					onPress={() => navigation.navigate("GroceryCreate")}>
+					<FontAwesome name="plus" size={25} style={{ color: headerButtonColor }}/>
+				</TouchableOpacity>
+			)
+		})
+	}, [navigation])
 
 	return (
 		<FlatList
