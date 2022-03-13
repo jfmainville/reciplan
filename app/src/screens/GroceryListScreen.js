@@ -26,14 +26,6 @@ const GroceryListScreen = ({ navigation }) => {
 
 	useEffect(() => {
 		fetchGroceries();
-
-		const listener = navigation.addListener("didFocus", () => {
-			fetchGroceries();
-		});
-
-		return () => {
-			listener.remove();
-		};
 	}, []);
 
 	return (
