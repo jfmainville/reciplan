@@ -25,7 +25,7 @@ const RecipeListScreen = ({ navigation }) => {
 	}, []);
 
 	return (
-		<SafeAreaView
+		<View
 			style={styles.container}
 		>
 			<FlatList
@@ -70,7 +70,7 @@ const RecipeListScreen = ({ navigation }) => {
 					);
 				}}
 			/>
-		</SafeAreaView>
+		</View>
 	);
 };
 
