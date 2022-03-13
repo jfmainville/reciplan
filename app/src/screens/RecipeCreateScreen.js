@@ -20,33 +20,23 @@ const RecipeCreateScreen = ({ navigation }) => {
 	);
 };
 
-RecipeCreateScreen.navigationOptions = ({ navigation }) => {
-	const createRecipe = navigation.getParam("createRecipe")
-	const recipeName = navigation.getParam("recipeName")
-	const recipeImage = navigation.getParam("recipeImage")
-	const recipeStyle = navigation.getParam("recipeStyle")
-	const recipePreparationTime = navigation.getParam("recipePreparationTime")
-	const recipeCookTime = navigation.getParam("recipeCookTime")
-	const ingredients = navigation.getParam("ingredients")
+		navigation.setOptions({
+			headerRight: () => (
+				<View style={{ flexDirection: "row" }}>
+					<TouchableOpacity
+						onPress={() => createRecipe(recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}>
+						<FontAwesome name="check" size={25} style={{ color: headerButtonColor }}/>
+					</TouchableOpacity>
+				</View>
+			)
+		})
+	}, [navigation, route])
 
-	return {
-		headerRight: () => (
-			<View style={{ flexDirection: "row" }}>
-				<TouchableOpacity
-					onPress={() => createRecipe(recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}>
-					<FontAwesome style={styles.headerIcons} name="check" size={25}/>
-				</TouchableOpacity>
-			</View>
-		),
-		title: "Create Recipe",
-		headerStyle: {
-			backgroundColor: "#4854C7",
-		},
-		headerTintColor: "#fff",
-		headerTitleStyle: {
-			fontWeight: "bold",
-		}
-	}
+	return (
+		<RecipeMultiStepsForm
+			navigation={navigation}
+		/>
+	);
 };
 
 const styles = StyleSheet.create({
