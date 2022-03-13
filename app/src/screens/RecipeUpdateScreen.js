@@ -47,35 +47,6 @@ const RecipeUpdateScreen = ({ navigation, route }) => {
 	);
 };
 
-RecipeUpdateScreen.navigationOptions = ({ navigation }) => {
-	const updateRecipe = navigation.getParam("updateRecipe")
-	const recipeId = navigation.getParam("id")
-	const recipeName = navigation.getParam("recipeName")
-	const recipeImage = navigation.getParam("recipeImage")
-	const recipeStyle = navigation.getParam("recipeStyle")
-	const recipePreparationTime = navigation.getParam("recipePreparationTime")
-	const recipeCookTime = navigation.getParam("recipeCookTime")
-	const ingredients = navigation.getParam("ingredients")
-	return {
-		headerRight: () => (
-			<View style={{ flexDirection: "row" }}>
-				<TouchableOpacity
-					onPress={() => updateRecipe(recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}>
-					<FontAwesome style={styles.headerIcons} name="check" size={25}/>
-				</TouchableOpacity>
-			</View>
-		),
-		title: "Update Recipe",
-		headerStyle: {
-			backgroundColor: "#4854C7",
-		},
-		headerTintColor: "#fff",
-		headerTitleStyle: {
-			fontWeight: "bold",
-		}
-	}
-};
-
 const styles = StyleSheet.create({
 	headerIcons: {
 		marginRight: 10,
