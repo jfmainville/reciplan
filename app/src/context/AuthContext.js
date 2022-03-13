@@ -81,5 +81,5 @@ const deleteAccount = (dispatch) => async () => {
 export const { Provider, Context } = createDataContext(
 	authReducer,
 	{ tryLocalSignin, signup, signin, signout, deleteAccount, clearErrorMessage },
-	{ token: null, errorMessage: "" }
+	{ token: null, loading: true, errorMessage: "" }
 );
