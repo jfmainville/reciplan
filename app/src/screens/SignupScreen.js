@@ -27,11 +27,6 @@ const SignupScreen = ({ navigation }) => {
 	);
 };
 
-SignupScreen.navigationOptions = () => {
-	return {
-		headerShown: false
-	};
-};
 
 const styles = StyleSheet.create({
 	container: {
