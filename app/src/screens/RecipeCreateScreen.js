@@ -6,7 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useTheme } from "react-native-paper";
 
 const RecipeCreateScreen = ({ navigation, route }) => {
-	const { headerButtonColor } = useTheme()
+	const { headerButtonColor, headerButtonColorDisabled } = useTheme()
 	const { createRecipe } = useContext(RecipeContext);
 
 	useLayoutEffect(() => {
@@ -20,10 +20,19 @@ const RecipeCreateScreen = ({ navigation, route }) => {
 		navigation.setOptions({
 			headerRight: () => (
 				<View style={{ flexDirection: "row" }}>
-					<TouchableOpacity
-						onPress={() => createRecipe(recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}>
-						<FontAwesome name="check" size={25} style={{ color: headerButtonColor }}/>
-					</TouchableOpacity>
+					{recipeName && ingredients.length ?
+						<TouchableOpacity
+							onPress={() => createRecipe(recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeList"))}
+						>
+							<FontAwesome name="check" size={25} style={{ color: headerButtonColor }}/>
+						</TouchableOpacity>
+						:
+						<TouchableOpacity
+							disabled={true}
+						>
+							<FontAwesome name="check" size={25} style={{ color: headerButtonColorDisabled }}/>
+						</TouchableOpacity>
+					}
 				</View>
 			)
 		})
