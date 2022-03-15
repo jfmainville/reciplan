@@ -32,6 +32,7 @@ const theme = {
 	},
 	headerTintColor: "#fff",
 	headerButtonColor: "#fff",
+	headerButtonColorDisabled: "lightgray",
 	statusBarColor: "light-content"
 };
 
