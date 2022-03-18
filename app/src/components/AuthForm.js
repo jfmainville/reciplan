@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
-import { Text, Button, Input } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
+import { Text, Button, TextInput } from "react-native-paper";
 import Spacer from "./Spacer";
 
 const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
@@ -8,19 +8,20 @@ const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
 	const [password, setPassword] = useState("");
 
 	return (
-		<>
+		<View>
 			<Spacer>
-				<Text h3>{headerText}</Text>
+				<Text style={{ margin: 5, fontSize: 40, color: "white" }}>{headerText}</Text>
 			</Spacer>
-			<Input
+			<TextInput
+				style={styles.textInput}
 				label="Email"
 				autoCapitalize="none"
 				autoCorrect={false}
 				value={email}
 				onChangeText={setEmail}
 			/>
-			<Spacer/>
-			<Input
+			<TextInput
+				style={styles.textInput}
 				label="Password"
 				autoCapitalize="none"
 				autoCorrect={false}
@@ -28,21 +29,31 @@ const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
 				value={password}
 				onChangeText={setPassword}
 			/>
-			{errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
-			<Spacer>
-				<Button
-					title={submitButtonText}
-					onPress={() => onSubmit({ email, password })}
-				/>
-			</Spacer>
-		</>
+			{errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> :
+				<Text style={styles.errorMessage}/>}
+			<Button
+				style={{ marginLeft: 5, marginRight: 5, marginTop: 10, borderColor: "white", borderWidth: 1 }}
+				labelStyle={{ fontSize: 25, color: "white" }}
+				mode="outlined"
+				onPress={() => onSubmit({ email, password })}
+			>
+				{submitButtonText}
+			</Button>
+		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	textInput: {
+		marginRight: 5,
+		marginLeft: 5,
+		marginTop: 5,
+		backgroundColor: "white"
+	},
 	errorMessage: {
 		fontSize: 16,
-		color: "red",
+		color: "white",
+		height: 30,
 		marginLeft: 15,
 		marginTop: 15
 	},
