@@ -43,7 +43,6 @@ const signup = (dispatch) => async ({ email, password }) => {
 		await AsyncStorage.setItem("email", email);
 		dispatch({ type: "signin", payload: response.data.token });
 	} catch (err) {
-		console.log(err);
 		dispatch({
 			type: "add_error",
 			payload: "Something went wrong with sign up"
