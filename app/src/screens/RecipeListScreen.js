@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { StyleSheet, TouchableOpacity, FlatList, Image, View } from "react-native";
-import { Text } from "react-native-elements";
+import { Text } from "react-native-paper";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { Context as GroceryContext } from "../context/GroceryContext";
 import { FontAwesome } from "@expo/vector-icons";
@@ -69,7 +69,7 @@ const RecipeListScreen = ({ navigation }) => {
 										</View>
 									}
 									<View style={{ flex: 3, marginLeft: 10, justifyContent: "center" }}>
-										<Text h4>{item.name}</Text>
+										<Text style={{ fontSize: 24 }}>{item.name}</Text>
 										<Text>{item.preparationTime} min.</Text>
 										<Text>{item.cookTime} min.</Text>
 									</View>
