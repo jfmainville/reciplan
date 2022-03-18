@@ -161,9 +161,15 @@ function AccountStackScreens() {
 
 function AuthenticationStackScreens() {
 	return (
-		<AuthenticationStack.Navigator>
-			<AuthenticationStack.Screen name="Signin" component={SigninScreen}/>
-			<AuthenticationStack.Screen name="Signup" component={SignupScreen}/>
+		<AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>
+			<AuthenticationStack.Screen
+				name="Signin"
+				component={SigninScreen}
+			/>
+			<AuthenticationStack.Screen
+				name="Signup"
+				component={SignupScreen}
+			/>
 		</AuthenticationStack.Navigator>
 	);
 }
