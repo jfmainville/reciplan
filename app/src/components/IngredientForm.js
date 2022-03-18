@@ -53,7 +53,7 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 							flex: 4
 						}}>
 							<TextInput
-								styles={styles.textInput}
+								style={styles.textInput}
 								mode="outlined"
 								label="Ingredient"
 								value={ingredientName}
