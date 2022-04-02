@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import AuthForm from "../components/AuthForm";
 import { Context as AuthContext } from "../context/AuthContext";
-import { Button, useTheme } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 
 const SigninScreen = ({ navigation }) => {
 	const { colors } = useTheme()
@@ -20,21 +20,19 @@ const SigninScreen = ({ navigation }) => {
 				errorMessage={state.errorMessage}
 				onSubmit={signin}
 			/>
-			<Button
+			<Text
 				style={{
+					color: colors.accent,
 					marginLeft: 5,
 					marginRight: 5,
-					marginTop: 10,
-					borderColor: "white",
-					borderWidth: 1,
-					backgroundColor: "white"
+					marginTop: 20,
+					fontSize: 18,
+					alignSelf: "center"
 				}}
-				labelStyle={{ fontSize: 25, color: colors.primary }}
-				mode="outlined"
 				onPress={() => navigation.navigate("Signup")}
 			>
 				Sign Up
-			</Button>
+			</Text>
 		</View>
 	);
 };
