@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text, Button, TextInput } from "react-native-paper";
+import { Text, Button, TextInput, useTheme } from "react-native-paper";
 import Spacer from "./Spacer";
 
 const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
+	const { colors } = useTheme()
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	return (
 		<View>
 			<Spacer>
-				<Text style={{ margin: 5, fontSize: 40, color: "white" }}>{headerText}</Text>
+				<Text style={{ margin: 5, fontSize: 40, color: colors.accent }}>{headerText}</Text>
 			</Spacer>
 			<TextInput
 				style={styles.textInput}
@@ -32,8 +33,8 @@ const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
 			{errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> :
 				<Text style={styles.errorMessage}/>}
 			<Button
-				style={{ marginLeft: 5, marginRight: 5, marginTop: 10, borderColor: "white", borderWidth: 1 }}
-				labelStyle={{ fontSize: 25, color: "white" }}
+				style={{ marginLeft: 5, marginRight: 5, marginTop: 10, borderColor: colors.accent, borderWidth: 1 }}
+				labelStyle={{ fontSize: 25, color: colors.accent }}
 				mode="outlined"
 				onPress={() => onSubmit({ email, password })}
 			>
@@ -53,9 +54,9 @@ const styles = StyleSheet.create({
 	errorMessage: {
 		fontSize: 16,
 		color: "white",
-		height: 30,
-		marginLeft: 15,
-		marginTop: 15
+		height: 20,
+		marginTop: 10,
+		marginLeft: 5
 	},
 });
 
