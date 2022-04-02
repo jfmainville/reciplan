@@ -27,8 +27,8 @@ const theme = {
 	roundness: 1,
 	colors: {
 		...DefaultTheme.colors,
-		primary: "#55c748",
-		accent: "#F49301"
+		primary: "#de3535",
+		accent: "#fff"
 	},
 	headerTintColor: "#fff",
 	headerButtonColor: "#fff",
