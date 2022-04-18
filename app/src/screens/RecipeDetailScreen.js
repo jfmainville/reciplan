@@ -5,7 +5,7 @@ import { FontAwesome, MaterialCommunityIcons, Entypo } from "@expo/vector-icons"
 import { useTheme, Text } from "react-native-paper";
 
 const RecipeDetailScreen = ({ navigation, route }) => {
-	const { headerButtonColor } = useTheme()
+	const { headerButtonColor, colors } = useTheme()
 	const { state: { recipes }, fetchRecipes, cleanRecipeImages } = useContext(RecipeContext);
 	const id = route.params.id;
 	const recipe = recipes.find(recipe => recipe._id === id);
