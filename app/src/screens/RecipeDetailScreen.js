@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, FlatList, Image } from "react-native";
 import { ButtonGroup, Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
@@ -8,7 +8,6 @@ import { useTheme } from "react-native-paper";
 const RecipeDetailScreen = ({ navigation, route }) => {
 	const { headerButtonColor } = useTheme()
 	const { state: { recipes }, fetchRecipes, cleanRecipeImages } = useContext(RecipeContext);
-	const [menuSection, setMenuSection] = useState(0);
 	const id = route.params.id;
 	const recipe = recipes.find(recipe => recipe._id === id);
 
