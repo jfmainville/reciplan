@@ -69,49 +69,17 @@ const RecipeDetailScreen = ({ navigation, route }) => {
 							</View>
 						</View>
 					</View>
-					<View style={styles.recipeButtonGroupContainer}>
-						<ButtonGroup
-							onPress={setMenuSection}
-							selectedIndex={menuSection}
-							// Temporarily disable the directions section
-							disabled={[1]}
-							selectedButtonStyle={{ backgroundColor: "#FAF7F7" }}
-							buttons={[{ element: () => <Text>Ingredients</Text> }, {
-								element: () => <Text>Directions</Text>
-							}]}
-							containerStyle={{ height: 40 }}/>
-					</View>
 				</View>
 			}
-			data={menuSection === 0 ? recipe.ingredients : [
-				{
-					_id: 1,
-					order: 1,
-					text: "Step 1"
-				},
-				{
-					_id: 2,
-					order: 2,
-					text: "Step 2"
-				}
-			]}
+			data={recipe.ingredients}
 			keyExtractor={item => item._id}
 			renderItem={({ item }) => {
-				if (menuSection === 0) {
-					return (
-						<View style={styles.itemsCard}>
-							<Text
-								style={styles.ingredientsList}>{`\u2022 ${item.quantity} ${item.weightUnit} ${item.name}`}</Text>
-						</View>
-					);
-				} else {
-					return (
-						<View style={styles.itemsCard}>
-							<Text style={styles.directionsListIcon}>{item.order}.</Text>
-							<Text style={styles.directionsListItem}>{item.text}</Text>
-						</View>
-					);
-				}
+				return (
+					<View style={styles.itemsCard}>
+						<Text
+							style={styles.ingredientsList}>{`\u2022 ${item.quantity} ${item.weightUnit} ${item.name}`}</Text>
+					</View>
+				);
 			}}
 		/>
 	);
