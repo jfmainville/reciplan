@@ -49,21 +49,32 @@ const RecipeDetailScreen = ({ navigation, route }) => {
 					</View>
 					<View style={styles.recipeContainer}>
 						<View>
-							<Text style={styles.recipeTitle}>{recipe.name}</Text>
+							<Text style={{ fontSize: 28, color: colors.primary }}>{recipe.name}</Text>
 							<Text style={styles.recipeStyle}>{recipe.style}</Text>
 						</View>
 						<View style={styles.recipeTimeContainer}>
 							<View style={styles.recipeTime}>
-								<FontAwesome style={styles.recipeIcon} name="spoon" size={25}/>
 								<Text>{recipe.preparationTime} min.</Text>
+								<FontAwesome style={{
+									color: colors.primary
+								}} name="spoon" size={25}/>
 							</View>
-							<View style={styles.recipeTime}>
-								<FontAwesome style={styles.recipeIcon} name="clock-o" size={25}/>
+							<View style={{
+								flexDirection: "row",
+								alignItems: "center",
+								justifyContent: "center",
+								color: colors.primary
+							}}>
 								<Text>{recipe.cookTime} min.</Text>
+								<FontAwesome style={{
+									color: colors.primary
+								}} name="clock-o" size={25}/>
 							</View>
 							<View style={styles.recipeTime}>
-								<Entypo style={styles.recipeIcon} name="calculator" size={25}/>
 								<Text>{recipe.ingredients.length}</Text>
+								<Entypo style={{
+									color: colors.primary
+								}} name="calculator" size={25}/>
 							</View>
 						</View>
 					</View>
@@ -93,13 +104,9 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		marginBottom: 20
 	},
-	recipeTitle: {
-		fontSize: 28,
-		color: "#F49301"
-	},
 	recipeStyle: {
-		fontSize: 24,
-		color: "gray"
+		fontSize: 20,
+		color: "black"
 	},
 	recipeTimeContainer: {
 		flexDirection: "column",
@@ -109,20 +116,15 @@ const styles = StyleSheet.create({
 	recipeTime: {
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "center",
-		color: "#4854C7"
+		justifyContent: "space-between"
 	},
 	recipeButtonGroupContainer: {
-		marginBottom: 10,
+		marginBottom: 10
 	},
 	itemsCard: {
 		flexDirection: "row",
 		alignItems: "center",
 		margin: 5
-	},
-	recipeIcon: {
-		marginRight: 10,
-		color: "#4854C7"
 	},
 	ingredientsList: {
 		fontSize: 20
