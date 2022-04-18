@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, FlatList, Image } from "react-native";
-import { ButtonGroup, Text } from "react-native-elements";
 import { Context as RecipeContext } from "../context/RecipeContext";
 import { FontAwesome, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
-import { useTheme } from "react-native-paper";
+import { useTheme, Text } from "react-native-paper";
 
 const RecipeDetailScreen = ({ navigation, route }) => {
 	const { headerButtonColor } = useTheme()
