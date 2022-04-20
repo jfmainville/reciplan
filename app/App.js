@@ -8,6 +8,7 @@ import RecipeCreateScreen from "./src/screens/RecipeCreateScreen";
 import RecipeUpdateScreen from "./src/screens/RecipeUpdateScreen";
 import RecipeListScreen from "./src/screens/RecipeListScreen";
 import RecipeDetailScreen from "./src/screens/RecipeDetailScreen";
+import RecipePlannerScreen from "./src/screens/RecipePlannerScreen";
 import GroceryCreateScreen from "./src/screens/GroceryCreateScreen";
 import GroceryListScreen from "./src/screens/GroceryListScreen";
 import AccountScreen from "./src/screens/AccountScreen";
@@ -37,6 +38,7 @@ const theme = {
 };
 
 const RecipeStack = createNativeStackNavigator();
+const RecipePlannerStack = createNativeStackNavigator();
 const GroceryStack = createNativeStackNavigator();
 const AccountStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
@@ -100,6 +102,27 @@ function RecipeStackScreens() {
 				}}
 			/>
 		</RecipeStack.Navigator>
+	);
+}
+
+function RecipePlannerStackScreens() {
+	return (
+		<RecipePlannerStack.Navigator>
+			<RecipePlannerStack.Screen
+				name="RecipePlannerScreen"
+				component={RecipePlannerScreen}
+				options={{
+					title: "Planner",
+					headerStyle: {
+						backgroundColor: theme.colors.primary
+					},
+					headerTintColor: theme.headerTintColor,
+					headerTitleStyle: {
+						fontWeight: "bold"
+					}
+				}}
+			/>
+		</RecipePlannerStack.Navigator>
 	);
 }
 
@@ -200,6 +223,16 @@ function BottomTabNavigator() {
 							tabBarLabel: "Recipes",
 							tabBarIcon: ({ color, size }) => (
 								<MaterialCommunityIcons name="chef-hat" color={color} size={size}/>
+							)
+						}}
+					/>
+					<Tab.Screen
+						name="Planner"
+						component={RecipePlannerStackScreens}
+						options={{
+							tabBarLabel: "Planner",
+							tabBarIcon: ({ color, size }) => (
+								<MaterialCommunityIcons name="calendar" color={color} size={size}/>
 							)
 						}}
 					/>
