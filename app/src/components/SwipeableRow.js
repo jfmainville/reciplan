@@ -74,6 +74,7 @@ const SwipeableRow = ({
 			style={{
 				flex: 1,
 				flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
+				backgroundColor: rightButtonColor
 			}}>
 			{renderRightAction(100, progress)}
 		</View>
