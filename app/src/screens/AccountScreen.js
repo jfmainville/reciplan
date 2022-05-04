@@ -24,9 +24,4 @@ const AccountScreen = () => {
 	);
 };
 
-AccountScreen.navigationOptions = {
-	title: "Account",
-	tabBarIcon: <FontAwesome name="gear" size={20}/>
-};
-
 export default AccountScreen;
