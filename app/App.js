@@ -235,6 +235,12 @@ function BottomTabNavigator() {
 								<MaterialCommunityIcons name="calendar" color={color} size={size}/>
 							)
 						}}
+						// Disable the Meal Planner button
+						listeners={{
+							tabPress: event => {
+								event.preventDefault();
+							},
+						}}
 					/>
 					<Tab.Screen
 						name="Groceries"
