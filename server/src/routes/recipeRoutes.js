@@ -16,6 +16,13 @@ router.get("/recipes", async (req, res) => {
 	res.send(recipes);
 });
 
+router.get("/recipes/details/:id", async (req, res) => {
+	const recipeId = req.params.id
+	const recipeDetails = await Recipe.findOne({ _id: recipeId, userId: req.user._id });
+
+	res.send(recipeDetails);
+});
+
 router.post("/recipes/images", async (req, res) => {
 	let { recipeName } = req.body;
 	let recipeImages = []
