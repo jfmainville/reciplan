@@ -11,6 +11,8 @@ const recipeReducer = (state, action) => {
 			return { ...state, images: action.payload }
 		case "clean_recipe_images":
 			return { ...state, images: [] }
+		case "create_recipe":
+			return { ...state, recipes: [...state.recipes, action.payload] }
 		case "update_recipe":
 			return {
 				...state, recipes: state.recipes.map((recipe) => {
@@ -45,8 +47,8 @@ const cleanRecipeImages = (dispatch) => async () => {
 	dispatch({ type: "clean_recipe_images" });
 }
 
-const createRecipe = () => async (recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
-	await recipeApi.post("/recipes/create", {
+const createRecipe = (dispatch) => async (recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
+	const response = await recipeApi.post("/recipes/create", {
 		recipeName,
 		recipeImage,
 		recipeStyle,
@@ -54,6 +56,7 @@ const createRecipe = () => async (recipeName, recipeImage, recipeStyle, recipePr
 		recipeCookTime,
 		ingredients
 	});
+	dispatch({ type: "create_recipe", payload: response.data });
 
 	if (callback) {
 		callback();
