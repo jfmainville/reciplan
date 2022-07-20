@@ -15,7 +15,7 @@ const RecipeListScreen = ({ navigation }) => {
 
 	useEffect(() => {
 		fetchRecipes();
-	}, [recipes]);
+	}, []);
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
