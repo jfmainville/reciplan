@@ -5,6 +5,8 @@ const recipeReducer = (state, action) => {
 	switch (action.type) {
 		case "fetch_recipes":
 			return { ...state, recipes: action.payload }
+		case "fetch_recipe_details":
+			return { ...state, recipe: action.payload }
 		case "fetch_recipe_images":
 			return { ...state, images: action.payload }
 		case "clean_recipe_images":
@@ -27,6 +29,11 @@ const recipeReducer = (state, action) => {
 const fetchRecipes = (dispatch) => async () => {
 	const response = await recipeApi.get("/recipes");
 	dispatch({ type: "fetch_recipes", payload: response.data });
+};
+
+const fetchRecipeDetails = (dispatch) => async (recipeId) => {
+	const response = await recipeApi.get(`/recipes/details/${recipeId}`);
+	dispatch({ type: "fetch_recipe_details", payload: response.data });
 };
 
 const fetchRecipeImages = (dispatch) => async (recipeName) => {
@@ -76,6 +83,14 @@ const deleteRecipe = (dispatch) => async (recipeId) => {
 
 export const { Provider, Context } = createDataContext(
 	recipeReducer,
-	{ fetchRecipes, fetchRecipeImages, cleanRecipeImages, createRecipe, updateRecipe, deleteRecipe },
-	{ recipes: [], images: [] }
+	{
+		fetchRecipes,
+		fetchRecipeDetails,
+		fetchRecipeImages,
+		cleanRecipeImages,
+		createRecipe,
+		updateRecipe,
+		deleteRecipe
+	},
+	{ recipe: [], recipes: [], images: [] }
 );
