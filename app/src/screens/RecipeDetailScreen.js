@@ -6,12 +6,11 @@ import { useTheme, Text } from "react-native-paper";
 
 const RecipeDetailScreen = ({ navigation, route }) => {
 	const { headerButtonColor, colors } = useTheme()
-	const { state: { recipes }, fetchRecipes, cleanRecipeImages } = useContext(RecipeContext);
+	const { state: { recipe }, fetchRecipeDetails, cleanRecipeImages } = useContext(RecipeContext);
 	const id = route.params.id;
-	const recipe = recipes.find(recipe => recipe._id === id);
 
 	useEffect(() => {
-		fetchRecipes();
+		fetchRecipeDetails(id);
 		cleanRecipeImages();
 	}, []);
 
@@ -71,7 +70,6 @@ const RecipeDetailScreen = ({ navigation, route }) => {
 								}} name="clock-o" size={25}/>
 							</View>
 							<View style={styles.recipeTime}>
-								<Text>{recipe.ingredients.length}</Text>
 								<Entypo style={{
 									color: colors.primary
 								}} name="calculator" size={25}/>
