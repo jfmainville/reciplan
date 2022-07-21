@@ -7,9 +7,8 @@ import { useTheme } from "react-native-paper";
 
 const RecipeUpdateScreen = ({ navigation, route }) => {
 	const { headerButtonColor } = useTheme()
-	const { state: { recipes }, updateRecipe } = useContext(RecipeContext);
+	const { state: { recipe }, updateRecipeDetails } = useContext(RecipeContext);
 	const recipeId = route.params.id;
-	const recipe = recipes.find(recipe => recipe._id === recipeId);
 
 	useLayoutEffect(() => {
 		const recipeName = route.params.recipeName
@@ -23,7 +22,7 @@ const RecipeUpdateScreen = ({ navigation, route }) => {
 			headerRight: () => (
 				<View style={{ flexDirection: "row" }}>
 					<TouchableOpacity
-						onPress={() => updateRecipe(recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}>
+						onPress={() => updateRecipeDetails(recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, () => navigation.navigate("RecipeDetail", { id: recipeId }))}>
 						<FontAwesome name="check" size={25} style={{ color: headerButtonColor }}/>
 					</TouchableOpacity>
 				</View>
