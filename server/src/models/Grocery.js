@@ -31,4 +31,4 @@ const grocerySchema = new mongoose.Schema({
 		timestamps: true
 	});
 
-mongoose.model("Grocery", grocerySchema);
+module.exports = mongoose.model("Grocery", grocerySchema);
