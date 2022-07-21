@@ -13,14 +13,8 @@ const recipeReducer = (state, action) => {
 			return { ...state, images: [] }
 		case "create_recipe":
 			return { ...state, recipes: [...state.recipes, action.payload] }
-		case "update_recipe":
-			return {
-				...state, recipes: state.recipes.map((recipe) => {
-					return recipe._id === action.payload._id
-						? action.payload
-						: recipe;
-				})
-			};
+		case "update_recipe_details":
+			return { ...state, recipe: action.payload };
 		case "delete_recipe":
 			return { ...state, recipes: state.recipes.filter((recipe) => recipe._id !== action.payload) };
 		default:
@@ -63,7 +57,7 @@ const createRecipe = (dispatch) => async (recipeName, recipeImage, recipeStyle, 
 	}
 };
 
-const updateRecipe = (dispatch) => async (recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
+const updateRecipeDetails = (dispatch) => async (recipeId, recipeName, recipeImage, recipeStyle, recipePreparationTime, recipeCookTime, ingredients, callback) => {
 	const response = await recipeApi.put(`/recipes/update/${recipeId}`, {
 		recipeName,
 		recipeImage,
@@ -72,7 +66,7 @@ const updateRecipe = (dispatch) => async (recipeId, recipeName, recipeImage, rec
 		recipeCookTime,
 		ingredients
 	});
-	dispatch({ type: "update_recipe", payload: response.data });
+	dispatch({ type: "update_recipe_details", payload: response.data });
 
 	if (callback) {
 		callback();
@@ -92,7 +86,7 @@ export const { Provider, Context } = createDataContext(
 		fetchRecipeImages,
 		cleanRecipeImages,
 		createRecipe,
-		updateRecipe,
+		updateRecipeDetails,
 		deleteRecipe
 	},
 	{ recipe: [], recipes: [], images: [] }
