@@ -27,8 +27,10 @@ const GroceryListScreen = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		fetchGroceries();
-	}, []);
+		return navigation.addListener("focus", () => {
+			fetchGroceries()
+		});
+	}, [navigation]);
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
