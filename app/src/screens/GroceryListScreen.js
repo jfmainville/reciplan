@@ -7,10 +7,10 @@ import SwipeableRow from "../components/SwipeableRow";
 
 const GroceryListScreen = ({ navigation }) => {
 	const { headerButtonColor } = useTheme()
-	const { state, fetchGroceries, deleteGrocery, checkGrocery } = useContext(GroceryContext);
+	const { state: { groceries }, fetchGroceries, deleteGrocery, checkGrocery } = useContext(GroceryContext);
 	let ingredients = [];
-	if (state.length > 0) {
-		state.reduce((result, ingredient) => {
+	if (groceries.length > 0) {
+		groceries.reduce((result, ingredient) => {
 			if (!result[ingredient.name]) {
 				result[ingredient.name] = {
 					_id: ingredient._id,
