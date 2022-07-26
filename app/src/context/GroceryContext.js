@@ -4,11 +4,14 @@ import recipeApi from "../api/recipe";
 const groceryReducer = (state, action) => {
 	switch (action.type) {
 		case "fetch_groceries":
-			return action.payload;
+			return { ...state, groceries: action.payload };
 		case "delete_grocery":
-			return state.filter((grocery) => grocery.name !== action.payload);
+			return { ...state, groceries: state.groceries.filter((grocery) => grocery.name !== action.payload) };
 		case "check_grocery":
-			return state.map(grocery => action.payload.find(({ _id }) => _id === grocery._id) || grocery);
+			return {
+				...state,
+				groceries: state.groceries.map(grocery => action.payload.find(({ _id }) => _id === grocery._id) || grocery)
+			};
 		default:
 			return state;
 	}
@@ -51,5 +54,5 @@ const checkGrocery = (dispatch) => async (groceryName, groceryCheck) => {
 export const { Provider, Context } = createDataContext(
 	groceryReducer,
 	{ fetchGroceries, addRecipeIngredients, createGrocery, deleteGrocery, checkGrocery },
-	[]
+	{ groceries: [] }
 );
