@@ -13,7 +13,6 @@ router.use(requireAuth);
 
 router.post("/ingredients/create", async (req, res) => {
 		let { ingredientName } = req.body;
-		ingredientName = ingredientName.toLowerCase()
 
 		if (!ingredientName) {
 			return res.status(422).send({ error: "You must provide all the recipe information to continue" });
