@@ -56,6 +56,7 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 								style={styles.textInput}
 								mode="outlined"
 								label="Ingredient"
+								autoCapitalize="none"
 								value={ingredientName}
 								onChangeText={(text) => setIngredientName(text)}
 							/>
