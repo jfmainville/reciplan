@@ -17,7 +17,7 @@ const GroceryCreateScreen = ({ navigation, route }) => {
 			headerRight: () => (
 				<View style={{ flexDirection: "row" }}>
 					<TouchableOpacity
-						onPress={() => createGrocery(groceryQuantity, groceryName, () => navigation.navigate("GroceryList"))}>
+						onPress={() => createGrocery(groceryQuantity, (groceryName).toLowerCase(), () => navigation.navigate("GroceryList"))}>
 						<FontAwesome name="check" size={25} style={{ color: headerButtonColor }}/>
 					</TouchableOpacity>
 				</View>
