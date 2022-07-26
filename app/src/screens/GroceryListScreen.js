@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useLayoutEffect } from "react";
+import React, { useContext, useCallback, useLayoutEffect } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Context as GroceryContext } from "../context/GroceryContext";
 import { FontAwesome } from "@expo/vector-icons";
@@ -26,11 +27,11 @@ const GroceryListScreen = ({ navigation }) => {
 		}, {});
 	}
 
-	useEffect(() => {
-		return navigation.addListener("focus", () => {
+	useFocusEffect(
+		useCallback(() => {
 			fetchGroceries()
-		});
-	}, [navigation]);
+		}, [])
+	);
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
