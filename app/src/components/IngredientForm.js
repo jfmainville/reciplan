@@ -12,7 +12,7 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 
 	const onAddIngredient = (ingredientQuantity, ingredientName) => {
 		if (ingredientQuantity && ingredientName) {
-			createIngredient(ingredientName)
+			createIngredient(ingredientName.toLowerCase())
 			const ingredientUnit = ingredientQuantity.split(/([0-9]+)/)[2].trim();
 			setIngredients(ingredients => [...ingredients, {
 				_id: ObjectID(),
