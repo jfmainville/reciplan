@@ -16,7 +16,7 @@ const IngredientForm = ({ ingredients, setIngredients }) => {
 			const ingredientUnit = ingredientQuantity.split(/([0-9]+)/)[2].trim();
 			setIngredients(ingredients => [...ingredients, {
 				_id: ObjectID(),
-				name: ingredientName,
+				name: (ingredientName).toLowerCase(),
 				quantity: parseInt(ingredientQuantity),
 				weightUnit: ingredientUnit
 			}]);
