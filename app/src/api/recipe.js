@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 const { manifest } = Constants;
 
 const instance = axios.create({
-	baseURL: `http://${manifest.debuggerHost.split(":").shift()}:3000`
+	baseURL: manifest.debuggerHost ? `http://${manifest.debuggerHost.split(":").shift()}:3000` : "http://localhost:3000"
 });
 
 instance.interceptors.request.use(
