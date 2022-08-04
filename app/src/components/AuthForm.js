@@ -20,6 +20,7 @@ const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
 				autoCorrect={false}
 				value={email}
 				onChangeText={setEmail}
+				testID="#email"
 			/>
 			<TextInput
 				style={styles.textInput}
@@ -29,6 +30,7 @@ const AuthForm = ({ headerText, submitButtonText, errorMessage, onSubmit }) => {
 				secureTextEntry
 				value={password}
 				onChangeText={setPassword}
+				testID="#password"
 			/>
 			{errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> :
 				<Text style={styles.errorMessage}/>}
