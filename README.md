@@ -12,7 +12,7 @@ purposes.
 The following applications need to be installed on the local computer in order to run the project locally:
 
 | Application | Minimum Version |                                       Link |
-| ----------- | :-------------: | -----------------------------------------: |
+|-------------|:---------------:|-------------------------------------------:|
 | Docker      |    19.03.2 +    | [Link](https://www.docker.com/get-started) |
 
 ### Development
